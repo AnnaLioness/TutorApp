@@ -14,6 +14,7 @@ namespace Models.Models
         public string Phone { get; set; }
         public int LevelId { get; set; }
         public LevelModel? Level { get; set; }
+        public List<LessonModel> Lessons { get; set; }
 
     }
 }
