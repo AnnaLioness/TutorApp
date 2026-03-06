@@ -1,6 +1,8 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Repositories;
+using Repositories.Implementations;
+using Services;
 using System;
 
 namespace TutorApp
@@ -57,6 +59,16 @@ namespace TutorApp
             // Не запускаем форму, просто показываем сообщение
             MessageBox.Show($"База данных создана!\nПуть: {dbPath}", "Успешно",
                 MessageBoxButtons.OK, MessageBoxIcon.Information);
+            services.AddScoped<LessonRepository>();
+            services.AddScoped<StudentRepository>();
+            services.AddScoped<MaterialRepository>();
+            services.AddScoped<PublicationRepository>();
+            services.AddScoped<LevelRepository>();
+            services.AddScoped<SubjectRepository>();
+            services.AddScoped<TypeRepository>();
+
+            // Регистрация сервисов
+            services.AddApplicationServices();
 
             // Можно даже не запускать форму, если нужно только создать БД
             // Application.Run(new Form1()); // закомментируйте, если не нужно
