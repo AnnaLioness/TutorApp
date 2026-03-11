@@ -1,0 +1,190 @@
+﻿namespace TutorApp
+{
+    partial class FormLevels
+    {
+        /// <summary>
+        /// Required designer variable.
+        /// </summary>
+        private System.ComponentModel.IContainer components = null;
+
+        /// <summary>
+        /// Clean up any resources being used.
+        /// </summary>
+        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing && (components != null))
+            {
+                components.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+
+        #region Windows Form Designer generated code
+
+        /// <summary>
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
+        /// </summary>
+        private void InitializeComponent()
+        {
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
+            dataGridView = new CustomControls.RJControls.RJDataGridView();
+            textBox1 = new TextBox();
+            label1 = new Label();
+            ButtonSave = new CustomControls.RJControls.RJButton();
+            ButtonUpd = new CustomControls.RJControls.RJButton();
+            ButtonDel = new CustomControls.RJControls.RJButton();
+            ((System.ComponentModel.ISupportInitialize)dataGridView).BeginInit();
+            SuspendLayout();
+            // 
+            // dataGridView
+            // 
+            dataGridView.AllowUserToAddRows = false;
+            dataGridView.AllowUserToDeleteRows = false;
+            dataGridViewCellStyle1.BackColor = Color.FromArgb(240, 240, 240);
+            dataGridViewCellStyle1.Font = new Font("Segoe UI", 9F);
+            dataGridViewCellStyle1.ForeColor = Color.Black;
+            dataGridView.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridView.BackgroundColor = Color.White;
+            dataGridView.BorderStyle = BorderStyle.None;
+            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = Color.DeepSkyBlue;
+            dataGridViewCellStyle2.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 204);
+            dataGridViewCellStyle2.ForeColor = Color.Black;
+            dataGridViewCellStyle2.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.True;
+            dataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridView.ColumnHeadersHeight = 30;
+            dataGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            dataGridView.EnableHeadersVisualStyles = false;
+            dataGridView.GridColor = Color.LightGray;
+            dataGridView.GridColorCustom = Color.LightGray;
+            dataGridView.HeaderBackColor = Color.DeepSkyBlue;
+            dataGridView.HeaderFont = new Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 204);
+            dataGridView.HeaderForeColor = Color.Black;
+            dataGridView.Location = new Point(12, 38);
+            dataGridView.Name = "dataGridView";
+            dataGridView.ReadOnly = true;
+            dataGridView.RowHeadersVisible = false;
+            dataGridView.RowHeadersWidth = 51;
+            dataGridViewCellStyle3.BackColor = Color.White;
+            dataGridViewCellStyle3.Font = new Font("Segoe UI", 9F);
+            dataGridViewCellStyle3.ForeColor = Color.Black;
+            dataGridViewCellStyle3.SelectionBackColor = Color.FromArgb(100, 120, 200);
+            dataGridViewCellStyle3.SelectionForeColor = Color.White;
+            dataGridView.RowsDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridView.RowsFont = new Font("Segoe UI", 9F);
+            dataGridView.RowsForeColor = Color.Black;
+            dataGridView.Size = new Size(328, 227);
+            dataGridView.TabIndex = 0;
+            dataGridView.SelectionChanged += dataGridView_SelectionChanged;
+            // 
+            // textBox1
+            // 
+            textBox1.Location = new Point(475, 39);
+            textBox1.Name = "textBox1";
+            textBox1.Size = new Size(266, 27);
+            textBox1.TabIndex = 1;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 204);
+            label1.Location = new Point(357, 38);
+            label1.Name = "label1";
+            label1.Size = new Size(112, 28);
+            label1.TabIndex = 2;
+            label1.Text = "Название:";
+            // 
+            // ButtonSave
+            // 
+            ButtonSave.BackColor = Color.DeepSkyBlue;
+            ButtonSave.BackgroundColor = Color.DeepSkyBlue;
+            ButtonSave.BorderColor = Color.PaleVioletRed;
+            ButtonSave.BorderRadius = 10;
+            ButtonSave.BorderSize = 0;
+            ButtonSave.FlatAppearance.BorderSize = 0;
+            ButtonSave.FlatStyle = FlatStyle.Flat;
+            ButtonSave.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 204);
+            ButtonSave.ForeColor = Color.Black;
+            ButtonSave.Location = new Point(357, 224);
+            ButtonSave.Name = "ButtonSave";
+            ButtonSave.Size = new Size(139, 41);
+            ButtonSave.TabIndex = 3;
+            ButtonSave.Text = "Сохранить";
+            ButtonSave.TextColor = Color.Black;
+            ButtonSave.UseVisualStyleBackColor = false;
+            ButtonSave.Click += ButtonSave_Click;
+            // 
+            // ButtonUpd
+            // 
+            ButtonUpd.BackColor = Color.DeepSkyBlue;
+            ButtonUpd.BackgroundColor = Color.DeepSkyBlue;
+            ButtonUpd.BorderColor = Color.PaleVioletRed;
+            ButtonUpd.BorderRadius = 10;
+            ButtonUpd.BorderSize = 0;
+            ButtonUpd.FlatAppearance.BorderSize = 0;
+            ButtonUpd.FlatStyle = FlatStyle.Flat;
+            ButtonUpd.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 204);
+            ButtonUpd.ForeColor = Color.Black;
+            ButtonUpd.Location = new Point(502, 224);
+            ButtonUpd.Name = "ButtonUpd";
+            ButtonUpd.Size = new Size(146, 41);
+            ButtonUpd.TabIndex = 4;
+            ButtonUpd.Text = "Редактировать";
+            ButtonUpd.TextColor = Color.Black;
+            ButtonUpd.UseVisualStyleBackColor = false;
+            ButtonUpd.Click += ButtonUpd_Click;
+            // 
+            // ButtonDel
+            // 
+            ButtonDel.BackColor = Color.DeepSkyBlue;
+            ButtonDel.BackgroundColor = Color.DeepSkyBlue;
+            ButtonDel.BorderColor = Color.PaleVioletRed;
+            ButtonDel.BorderRadius = 10;
+            ButtonDel.BorderSize = 0;
+            ButtonDel.FlatAppearance.BorderSize = 0;
+            ButtonDel.FlatStyle = FlatStyle.Flat;
+            ButtonDel.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 204);
+            ButtonDel.ForeColor = Color.Black;
+            ButtonDel.Location = new Point(654, 224);
+            ButtonDel.Name = "ButtonDel";
+            ButtonDel.Size = new Size(139, 41);
+            ButtonDel.TabIndex = 5;
+            ButtonDel.Text = "Удалить";
+            ButtonDel.TextColor = Color.Black;
+            ButtonDel.UseVisualStyleBackColor = false;
+            ButtonDel.Click += ButtonDel_Click;
+            // 
+            // FormLevels
+            // 
+            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(800, 289);
+            Controls.Add(ButtonDel);
+            Controls.Add(ButtonUpd);
+            Controls.Add(ButtonSave);
+            Controls.Add(label1);
+            Controls.Add(textBox1);
+            Controls.Add(dataGridView);
+            Name = "FormLevels";
+            Text = "FormLevels";
+            ((System.ComponentModel.ISupportInitialize)dataGridView).EndInit();
+            ResumeLayout(false);
+            PerformLayout();
+        }
+
+        #endregion
+
+        private CustomControls.RJControls.RJDataGridView dataGridView;
+        private TextBox textBox1;
+        private Label label1;
+        private CustomControls.RJControls.RJButton ButtonSave;
+        private CustomControls.RJControls.RJButton ButtonUpd;
+        private CustomControls.RJControls.RJButton ButtonDel;
+    }
+}

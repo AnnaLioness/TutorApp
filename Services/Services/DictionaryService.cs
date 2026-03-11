@@ -51,6 +51,53 @@ namespace Services.Services
 
             return (true, "Уровень создан", level);
         }
+        /// Обновить существующий уровень
+        /// </summary>
+        public async Task<(bool success, string message)> UpdateLevel(int levelId, string newLevelName)
+        {
+            if (string.IsNullOrWhiteSpace(newLevelName))
+                return (false, "Название уровня обязательно");
+
+            var level = await _levelRepository.GetByIdAsync(levelId);
+            if (level == null)
+                return (false, "Уровень не найден");
+
+            // Проверяем, не существует ли уже другой уровень с таким названием
+            var existing = await _levelRepository.GetByName(newLevelName);
+            if (existing != null && existing.Id != levelId)
+                return (false, "Уровень с таким названием уже существует");
+
+            level.LevelName = newLevelName;
+
+            // Используем метод Update из базового репозитория
+            await _levelRepository.UpdateAsync(level);
+            await _levelRepository.SaveAsync();
+
+            return (true, "Уровень успешно обновлен");
+        }
+
+        /// <summary>
+        /// Удалить уровень
+        /// </summary>
+        public async Task<(bool success, string message)> DeleteLevel(int levelId)
+        {
+            try
+            {
+                var level = await _levelRepository.GetByIdAsync(levelId);
+                if (level == null)
+                    return (false, "Уровень не найден");
+
+                // Используем метод Delete из базового репозитория
+                await _levelRepository.DeleteAsync(level);
+                await _levelRepository.SaveAsync();
+
+                return (true, "Уровень успешно удален");
+            }
+            catch (Exception ex)
+            {
+                return (false, $"Ошибка при удалении уровня: {ex.Message}");
+            }
+        }
 
         // ПРЕДМЕТЫ
         public async Task<IEnumerable<SubjectModel>> GetAllSubjects()

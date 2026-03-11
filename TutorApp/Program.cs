@@ -3,12 +3,14 @@ using Microsoft.Extensions.DependencyInjection;
 using Repositories;
 using Repositories.Implementations;
 using Services;
+using Services.Services;
 using System;
 
 namespace TutorApp
 {
     internal static class Program
     {
+        public static IServiceProvider ServiceProvider { get; private set; }
         /// <summary>
         ///  The main entry point for the application.
         /// </summary>
@@ -28,10 +30,32 @@ namespace TutorApp
             services.AddDbContext<AppDbContext>(options =>
                 options.UseSqlite($"Data Source={dbPath}"));
 
-            var serviceProvider = services.BuildServiceProvider();
+            
+
+
+            // Не запускаем форму, просто показываем сообщение
+           // MessageBox.Show($"База данных создана!\nПуть: {dbPath}", "Успешно",MessageBoxButtons.OK, MessageBoxIcon.Information);
+            services.AddTransient<LessonRepository>();
+            services.AddTransient<StudentRepository>();
+            services.AddTransient<MaterialRepository>();
+            services.AddTransient<PublicationRepository>();
+            services.AddTransient<LevelRepository>();
+            services.AddTransient<SubjectRepository>();
+            services.AddTransient<TypeRepository>();
+            // Регистрация сервисов
+            services.AddTransient<StudentService>();
+            services.AddTransient<DictionaryService>();
+            services.AddTransient<LessonService>();
+            services.AddTransient<MaterialService>();
+            services.AddTransient<PublicationService>();
+            services.AddTransient<FormMain>();
+            services.AddTransient<FormStudents>();
+            services.AddTransient<FormStudent>();
+            services.AddTransient<FormLevels>();
+            ServiceProvider = services.BuildServiceProvider();
 
             // Создаём базу данных
-            using (var scope = serviceProvider.CreateScope())
+            using (var scope = ServiceProvider.CreateScope())
             {
                 var context = scope.ServiceProvider.GetRequiredService<AppDbContext>();
 
@@ -56,22 +80,11 @@ namespace TutorApp
                 }
             }
 
-            // Не запускаем форму, просто показываем сообщение
-            MessageBox.Show($"База данных создана!\nПуть: {dbPath}", "Успешно",
-                MessageBoxButtons.OK, MessageBoxIcon.Information);
-            services.AddScoped<LessonRepository>();
-            services.AddScoped<StudentRepository>();
-            services.AddScoped<MaterialRepository>();
-            services.AddScoped<PublicationRepository>();
-            services.AddScoped<LevelRepository>();
-            services.AddScoped<SubjectRepository>();
-            services.AddScoped<TypeRepository>();
-
             // Регистрация сервисов
             services.AddApplicationServices();
 
             // Можно даже не запускать форму, если нужно только создать БД
-            // Application.Run(new Form1()); // закомментируйте, если не нужно
+            Application.Run(ServiceProvider.GetRequiredService<FormMain>()); // закомментируйте, если не нужно
         }
     }
 }
