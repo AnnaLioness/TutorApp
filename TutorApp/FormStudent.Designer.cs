@@ -142,7 +142,7 @@
             ButtonAddLevel.FlatStyle = FlatStyle.Flat;
             ButtonAddLevel.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point, 204);
             ButtonAddLevel.ForeColor = Color.Black;
-            ButtonAddLevel.Location = new Point(431, 272);
+            ButtonAddLevel.Location = new Point(455, 269);
             ButtonAddLevel.Name = "ButtonAddLevel";
             ButtonAddLevel.Size = new Size(357, 50);
             ButtonAddLevel.TabIndex = 9;
@@ -155,7 +155,7 @@
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 344);
+            ClientSize = new Size(837, 344);
             Controls.Add(ButtonAddLevel);
             Controls.Add(rjButton1);
             Controls.Add(label4);

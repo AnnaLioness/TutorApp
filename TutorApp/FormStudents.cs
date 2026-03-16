@@ -152,6 +152,7 @@ namespace TutorApp
                     // Сохраняем ID студента в теге строки для удобства
                     dataGridView.Rows[rowIndex].Tag = student;
                 }
+                dataGridView.ClearSelection();
             }
             catch (Exception ex)
             {
@@ -230,7 +231,7 @@ namespace TutorApp
                 var studentForm = Program.ServiceProvider.GetRequiredService<FormStudent>();
 
                 // Передаем null для режима добавления
-                studentForm.SetStudent(null, _levels);
+                //studentForm.SetStudent(null, _levels);
 
                 // Показываем форму и ждем результат
                 if (studentForm.ShowDialog() == DialogResult.OK)
@@ -246,7 +247,7 @@ namespace TutorApp
             }
         }
 
-        private void ButtonUpdate_Click(object sender, EventArgs e)
+        private async void ButtonUpdate_Click(object sender, EventArgs e)
         {
             // Проверяем, выбрана ли строка
             if (dataGridView.SelectedRows.Count == 0)
@@ -259,13 +260,16 @@ namespace TutorApp
             try
             {
                 // Получаем выбранного ученика
-                var selectedRow = dataGridView.SelectedRows[0].DataBoundItem;
-                int studentId = (int)selectedRow.GetType().GetProperty("Id")?.GetValue(selectedRow);
+                //var selectedRow = dataGridView.SelectedRows[0].DataBoundItem;
+                //int studentId = (int)selectedRow.GetType().GetProperty("Id")?.GetValue(selectedRow);
 
                 // Находим полного ученика с данными
-                var student = _students.FirstOrDefault(s => s.Id == studentId);
+                //var student = _students.FirstOrDefault(s => s.Id == studentId);
+                int id = (int)dataGridView.SelectedRows[0].Cells["Id"].Value;
 
-                if (student == null)
+                var stud = await _studentService.GetStudentById(id);
+
+                if (stud == null)
                 {
                     MessageBox.Show("Не удалось найти данные ученика",
                         "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -276,7 +280,7 @@ namespace TutorApp
                 var studentForm = Program.ServiceProvider.GetRequiredService<FormStudent>();
 
                 // Передаем ученика для редактирования
-                studentForm.SetStudent(student, _levels);
+                studentForm.SetStudent(stud, _levels);
 
                 // Показываем форму и ждем результат
                 if (studentForm.ShowDialog() == DialogResult.OK)
@@ -296,22 +300,61 @@ namespace TutorApp
         {
             LoadDataAsync();
         }
+        private bool _isDeleting = false;
 
         private async void dataGridView_CellClick(object sender, DataGridViewCellEventArgs e)
         {
+            /*if (_isDeleting)
+                return;
             // Проверяем, что клик не по заголовку и строка существует
             if (e.RowIndex < 0 || e.ColumnIndex < 0)
                 return;
-
+            //var student = dataGridView.Rows[e.RowIndex].Tag as StudentModel;
             // Проверяем, что клик по колонке с кнопкой удаления
             if (dataGridView.Columns[e.ColumnIndex].Name == "DeleteButton")
             {
-                // Получаем студента из тега строки
+                // ПРОВЕРЯЕМ, ЧТО СТРОКА ВСЕ ЕЩЕ СУЩЕСТВУЕТ
+                if (e.RowIndex >= dataGridView.Rows.Count)
+                    return;
+
                 var student = dataGridView.Rows[e.RowIndex].Tag as StudentModel;
+                // Получаем студента из тега строки
                 if (student != null)
                 {
+                    //_isDeleting = true;
                     await DeleteStudent(student);
+                    //dataGridView.ClearSelection();
+                    //LoadDataAsync();
+                    _isDeleting = false;
+                    
+                    return;
                 }
+                await Task.Delay(100); // Даем время событию успокоиться
+                _isDeleting = false;
+            }*/
+            if (_isDeleting)
+                return;
+            // Проверяем индексы
+            if (e.RowIndex < 0 || e.ColumnIndex < 0)
+                return;
+
+            // Проверяем, что это кнопка удаления
+            if (dataGridView.Columns[e.ColumnIndex].Name != "DeleteButton")
+                return;
+
+            // Проверяем, что строка существует
+            if (e.RowIndex >= dataGridView.Rows.Count)
+                return;
+
+            var student = dataGridView.Rows[e.RowIndex].Tag as StudentModel;
+            if (student != null)
+            {
+                _isDeleting = true;
+                await DeleteStudent(student);
+                _ = Task.Delay(500).ContinueWith(_ =>
+                {
+                    _isDeleting = false;
+                }, TaskScheduler.FromCurrentSynchronizationContext());
             }
         }
         // Метод удаления студента
