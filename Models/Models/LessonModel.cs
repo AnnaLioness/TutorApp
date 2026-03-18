@@ -13,7 +13,7 @@ namespace Models.Models
         public DateOnly Date {  get; set; }
         public TimeOnly Time { get; set; }
         public int Price { get; set; }
-        public string Comment { get; set; }
+        public string? Comment { get; set; }
         public LessonStatus Status { get; set; }
         public int StudentId { get; set; }
         public StudentModel Student { get; set; }

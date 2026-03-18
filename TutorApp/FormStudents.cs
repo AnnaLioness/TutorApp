@@ -259,12 +259,7 @@ namespace TutorApp
 
             try
             {
-                // Получаем выбранного ученика
-                //var selectedRow = dataGridView.SelectedRows[0].DataBoundItem;
-                //int studentId = (int)selectedRow.GetType().GetProperty("Id")?.GetValue(selectedRow);
 
-                // Находим полного ученика с данными
-                //var student = _students.FirstOrDefault(s => s.Id == studentId);
                 int id = (int)dataGridView.SelectedRows[0].Cells["Id"].Value;
 
                 var stud = await _studentService.GetStudentById(id);
@@ -304,34 +299,6 @@ namespace TutorApp
 
         private async void dataGridView_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            /*if (_isDeleting)
-                return;
-            // Проверяем, что клик не по заголовку и строка существует
-            if (e.RowIndex < 0 || e.ColumnIndex < 0)
-                return;
-            //var student = dataGridView.Rows[e.RowIndex].Tag as StudentModel;
-            // Проверяем, что клик по колонке с кнопкой удаления
-            if (dataGridView.Columns[e.ColumnIndex].Name == "DeleteButton")
-            {
-                // ПРОВЕРЯЕМ, ЧТО СТРОКА ВСЕ ЕЩЕ СУЩЕСТВУЕТ
-                if (e.RowIndex >= dataGridView.Rows.Count)
-                    return;
-
-                var student = dataGridView.Rows[e.RowIndex].Tag as StudentModel;
-                // Получаем студента из тега строки
-                if (student != null)
-                {
-                    //_isDeleting = true;
-                    await DeleteStudent(student);
-                    //dataGridView.ClearSelection();
-                    //LoadDataAsync();
-                    _isDeleting = false;
-                    
-                    return;
-                }
-                await Task.Delay(100); // Даем время событию успокоиться
-                _isDeleting = false;
-            }*/
             if (_isDeleting)
                 return;
             // Проверяем индексы

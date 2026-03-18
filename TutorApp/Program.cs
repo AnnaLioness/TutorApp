@@ -52,6 +52,11 @@ namespace TutorApp
             services.AddTransient<FormStudents>();
             services.AddTransient<FormStudent>();
             services.AddTransient<FormLevels>();
+            services.AddTransient<FormLessons>();
+            services.AddTransient<FormLesson>();
+            services.AddTransient<FormStudents>();
+            services.AddTransient<FormTypes>();
+            services.AddTransient<FormSubjects>();
             ServiceProvider = services.BuildServiceProvider();
 
             // Создаём базу данных
@@ -63,7 +68,14 @@ namespace TutorApp
                 // context.Database.EnsureCreated();
 
                 // Вариант 2: Применить миграции (рекомендуется)
-                context.Database.Migrate();
+                if (!context.Database.CanConnect())
+                {
+                    context.Database.Migrate(); // создаём БД только если её нет
+                }
+                else
+                {
+                    Console.WriteLine("База данных уже существует");
+                }
 
                 Console.WriteLine("База данных успешно создана!");
                 Console.WriteLine($"Файл: {dbPath}");

@@ -23,5 +23,20 @@ namespace TutorApp
                     "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+        private void Lessons_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                var lessonsForm = Program.ServiceProvider.GetRequiredService<FormLessons>();
+                lessonsForm.Show(); // Открываем модально
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Ошибка при открытии формы: {ex.Message}",
+                    "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
     }
 }

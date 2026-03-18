@@ -58,5 +58,10 @@ namespace Repositories.Implementations
                 .ThenBy(t => t.TypeName)
                 .ToListAsync();
         }
+        public async Task<TypeModel?> GetByName(string typeName)
+        {
+            return await _dbSet
+                .FirstOrDefaultAsync(s => s.TypeName.ToLower() == typeName.ToLower());
+        }
     }
 }

@@ -11,8 +11,8 @@ using Repositories;
 namespace Repositories.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20260304113106_Initial")]
-    partial class Initial
+    [Migration("20260318223833_Nullable")]
+    partial class Nullable
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -27,7 +27,6 @@ namespace Repositories.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Comment")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<DateOnly>("Date")
@@ -187,9 +186,6 @@ namespace Repositories.Migrations
                     b.Property<int>("SubjectId")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int?>("SubjectModelId")
-                        .HasColumnType("INTEGER");
-
                     b.Property<string>("TypeName")
                         .IsRequired()
                         .HasColumnType("TEXT");
@@ -197,8 +193,6 @@ namespace Repositories.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("SubjectId");
-
-                    b.HasIndex("SubjectModelId");
 
                     b.ToTable("Types");
                 });
@@ -266,14 +260,10 @@ namespace Repositories.Migrations
             modelBuilder.Entity("Models.Models.TypeModel", b =>
                 {
                     b.HasOne("Models.Models.SubjectModel", "Subject")
-                        .WithMany()
+                        .WithMany("Types")
                         .HasForeignKey("SubjectId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.HasOne("Models.Models.SubjectModel", null)
-                        .WithMany("Types")
-                        .HasForeignKey("SubjectModelId");
 
                     b.Navigation("Subject");
                 });

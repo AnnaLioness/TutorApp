@@ -125,7 +125,47 @@ namespace Services.Services
 
             return (true, "Предмет создан", subject);
         }
+        public async Task<(bool success, string message)> UpdateSubject(int subjectId, string newSubjectName)
+        {
+            if (string.IsNullOrWhiteSpace(newSubjectName))
+                return (false, "Название предмета обязательно");
 
+            var subject = await _subjectRepository.GetByIdAsync(subjectId);
+            if (subject == null)
+                return (false, "Предмет не найден");
+
+            // Проверяем, не существует ли уже другой уровень с таким названием
+            var existing = await _subjectRepository.GetByName(newSubjectName);
+            if (existing != null && existing.Id != subjectId)
+                return (false, "Предмет с таким названием уже существует");
+
+            subject.SubjectName = newSubjectName;
+
+            // Используем метод Update из базового репозитория
+            await _subjectRepository.UpdateAsync(subject);
+            await _subjectRepository.SaveAsync();
+
+            return (true, "Предмет успешно обновлен");
+        }
+        public async Task<(bool success, string message)> DeleteSubject(int subjectId)
+        {
+            try
+            {
+                var subject = await _subjectRepository.GetByIdAsync(subjectId);
+                if (subject == null)
+                    return (false, "Предмет не найден");
+
+                // Используем метод Delete из базового репозитория
+                await _subjectRepository.DeleteAsync(subject);
+                await _subjectRepository.SaveAsync();
+
+                return (true, "Предмет успешно удален");
+            }
+            catch (Exception ex)
+            {
+                return (false, $"Ошибка при удалении предмета: {ex.Message}");
+            }
+        }
         // ТИПЫ ЗАНЯТИЙ
         public async Task<IEnumerable<TypeModel>> GetAllTypes()
         {
@@ -163,6 +203,48 @@ namespace Services.Services
             await _typeRepository.SaveAsync();
 
             return (true, "Тип занятия создан", type);
+        }
+        public async Task<(bool success, string message)> UpdateType(int typeId, string newTypeName, int subjectId)
+        {
+            if (string.IsNullOrWhiteSpace(newTypeName))
+                return (false, "Название типа занятия обязательно");
+
+            var type = await _typeRepository.GetByIdAsync(typeId);
+            if (type == null)
+                return (false, "Тип занятия не найден");
+
+            // Проверяем, не существует ли уже другой уровень с таким названием
+            var existing = await _typeRepository.GetByName(newTypeName);
+            if (existing != null && existing.Id != subjectId)
+                return (false, "Предмет с таким названием уже существует");
+
+            type.TypeName = newTypeName;
+            type.SubjectId = subjectId;
+
+            // Используем метод Update из базового репозитория
+            await _typeRepository.UpdateAsync(type);
+            await _subjectRepository.SaveAsync();
+
+            return (true, "Предмет успешно обновлен");
+        }
+        public async Task<(bool success, string message)> DeleteType(int typeId)
+        {
+            try
+            {
+                var type = await _typeRepository.GetByIdAsync(typeId);
+                if (type == null)
+                    return (false, "Тип занятия не найден");
+
+                // Используем метод Delete из базового репозитория
+                await _typeRepository.DeleteAsync(type);
+                await _typeRepository.SaveAsync();
+
+                return (true, "Тип занятия успешно удален");
+            }
+            catch (Exception ex)
+            {
+                return (false, $"Ошибка при удалении Типа занятия: {ex.Message}");
+            }
         }
     }
 }

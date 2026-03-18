@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Repositories.Migrations
 {
     /// <inheritdoc />
-    public partial class Initial : Migration
+    public partial class InitialCreate : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -66,8 +66,7 @@ namespace Repositories.Migrations
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     SubjectId = table.Column<int>(type: "INTEGER", nullable: false),
-                    TypeName = table.Column<string>(type: "TEXT", nullable: false),
-                    SubjectModelId = table.Column<int>(type: "INTEGER", nullable: true)
+                    TypeName = table.Column<string>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -78,11 +77,6 @@ namespace Repositories.Migrations
                         principalTable: "Subjects",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Types_Subjects_SubjectModelId",
-                        column: x => x.SubjectModelId,
-                        principalTable: "Subjects",
-                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -202,11 +196,6 @@ namespace Repositories.Migrations
                 name: "IX_Types_SubjectId",
                 table: "Types",
                 column: "SubjectId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Types_SubjectModelId",
-                table: "Types",
-                column: "SubjectModelId");
         }
 
         /// <inheritdoc />

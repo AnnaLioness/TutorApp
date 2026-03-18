@@ -60,39 +60,7 @@ namespace TutorApp
             }
         }
 
-        /// <summary>
-        /// Валидация полей формы
-        /// </summary>
-        private bool ValidateForm()
-        {
-            // Проверка ФИО
-            if (string.IsNullOrWhiteSpace(textBoxName.Text))
-            {
-                MessageBox.Show("Введите ФИО ученика", "Ошибка",
-                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                textBoxName.Focus();
-                return false;
-            }
 
-            // Проверка возраста
-            if (numericUpDownAge.Value < 3 || numericUpDownAge.Value > 100)
-            {
-                MessageBox.Show("Возраст должен быть от 3 до 100 лет", "Ошибка",
-                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                numericUpDownAge.Focus();
-                return false;
-            }
-
-            // Проверка выбора уровня
-            if (!comboBox1.Enabled || comboBox1.SelectedItem == null)
-            {
-                MessageBox.Show("Нет доступных уровней для выбора. Сначала добавьте уровни в справочник.",
-                    "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return false;
-            }
-
-            return true;
-        }
 
         /// <summary>
         /// Обработчик кнопки сохранения
@@ -126,7 +94,7 @@ namespace TutorApp
                 MessageBox.Show("Введите ФИО ученика", "Ошибка",
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
-            if (textBoxPhone.Text.Length != 6 || textBoxPhone.Text.Length != 11)
+            if (textBoxPhone.Text.Length != 6 && textBoxPhone.Text.Length != 11)
             {
                 MessageBox.Show("Неверный формат номера", "Ошибка",
                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -145,7 +113,6 @@ namespace TutorApp
                 MessageBox.Show("Нет доступных уровней для выбора. Сначала добавьте уровни в справочник.",
                     "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
-            // await _studentService.CreateStudent(textBoxName.Text, (int)numericUpDownAge.Value,textBoxPhone.Text, (int)level);
             if (_isEditMode)
             {
                 // Режим редактирования

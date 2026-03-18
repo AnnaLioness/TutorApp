@@ -43,14 +43,16 @@ namespace Repositories
             // Связь Type -> Subject (многие к одному)
             modelBuilder.Entity<TypeModel>()
                 .HasOne(t => t.Subject)
-                .WithMany()
-                .HasForeignKey(t => t.SubjectId);
+                .WithMany(s => s.Types)
+                .HasForeignKey(t => t.SubjectId)
+                .OnDelete(DeleteBehavior.Cascade);
 
             // Связь Lesson -> Student (многие к одному)
             modelBuilder.Entity<LessonModel>()
                 .HasOne(l => l.Student)
                 .WithMany(s => s.Lessons)  // если у StudentModel есть коллекция Lessons
-                .HasForeignKey(l => l.StudentId);
+                .HasForeignKey(l => l.StudentId)
+                .OnDelete(DeleteBehavior.Cascade);
 
             // Связь Lesson -> Type (многие к одному)
             modelBuilder.Entity<LessonModel>()

@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             Students = new CustomControls.RJControls.RJButton();
+            Lessons = new CustomControls.RJControls.RJButton();
             SuspendLayout();
             // 
             // Students
@@ -51,13 +52,34 @@
             Students.UseVisualStyleBackColor = false;
             Students.Click += Students_Click;
             // 
-            // Form1
+            // Lessons
+            // 
+            Lessons.BackColor = Color.DeepSkyBlue;
+            Lessons.BackgroundColor = Color.DeepSkyBlue;
+            Lessons.BorderColor = Color.PaleVioletRed;
+            Lessons.BorderRadius = 10;
+            Lessons.BorderSize = 0;
+            Lessons.FlatAppearance.BorderSize = 0;
+            Lessons.FlatStyle = FlatStyle.Flat;
+            Lessons.Font = new Font("Segoe UI Black", 12F, FontStyle.Bold, GraphicsUnit.Point, 204);
+            Lessons.ForeColor = Color.Black;
+            Lessons.Location = new Point(304, 105);
+            Lessons.Name = "Lessons";
+            Lessons.Size = new Size(188, 50);
+            Lessons.TabIndex = 1;
+            Lessons.Text = "Уроки";
+            Lessons.TextColor = Color.Black;
+            Lessons.UseVisualStyleBackColor = false;
+            Lessons.Click += Lessons_Click;
+            // 
+            // FormMain
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(Lessons);
             Controls.Add(Students);
-            Name = "Form1";
+            Name = "FormMain";
             Text = "Form1";
             ResumeLayout(false);
         }
@@ -65,5 +87,6 @@
         #endregion
 
         private CustomControls.RJControls.RJButton Students;
+        private CustomControls.RJControls.RJButton Lessons;
     }
 }
