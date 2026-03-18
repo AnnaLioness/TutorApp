@@ -37,6 +37,7 @@
             ButtonDel = new CustomControls.RJControls.RJButton();
             ButtonUpd = new CustomControls.RJControls.RJButton();
             ButtonSave = new CustomControls.RJControls.RJButton();
+            label7 = new Label();
             ((System.ComponentModel.ISupportInitialize)dataGridView).BeginInit();
             SuspendLayout();
             // 
@@ -66,7 +67,7 @@
             dataGridView.HeaderBackColor = Color.DeepSkyBlue;
             dataGridView.HeaderFont = new Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 204);
             dataGridView.HeaderForeColor = Color.Black;
-            dataGridView.Location = new Point(12, 12);
+            dataGridView.Location = new Point(11, 91);
             dataGridView.Name = "dataGridView";
             dataGridView.ReadOnly = true;
             dataGridView.RowHeadersVisible = false;
@@ -87,7 +88,7 @@
             // 
             label2.AutoSize = true;
             label2.Font = new Font("Segoe UI Black", 12F, FontStyle.Bold, GraphicsUnit.Point, 204);
-            label2.Location = new Point(352, 12);
+            label2.Location = new Point(351, 91);
             label2.Name = "label2";
             label2.Size = new Size(115, 28);
             label2.TabIndex = 12;
@@ -95,7 +96,7 @@
             // 
             // textBox1
             // 
-            textBox1.Location = new Point(480, 12);
+            textBox1.Location = new Point(479, 91);
             textBox1.Name = "textBox1";
             textBox1.Size = new Size(291, 27);
             textBox1.TabIndex = 11;
@@ -111,7 +112,7 @@
             ButtonDel.FlatStyle = FlatStyle.Flat;
             ButtonDel.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 204);
             ButtonDel.ForeColor = Color.Black;
-            ButtonDel.Location = new Point(651, 198);
+            ButtonDel.Location = new Point(650, 277);
             ButtonDel.Name = "ButtonDel";
             ButtonDel.Size = new Size(139, 41);
             ButtonDel.TabIndex = 16;
@@ -131,7 +132,7 @@
             ButtonUpd.FlatStyle = FlatStyle.Flat;
             ButtonUpd.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 204);
             ButtonUpd.ForeColor = Color.Black;
-            ButtonUpd.Location = new Point(499, 198);
+            ButtonUpd.Location = new Point(498, 277);
             ButtonUpd.Name = "ButtonUpd";
             ButtonUpd.Size = new Size(146, 41);
             ButtonUpd.TabIndex = 15;
@@ -151,7 +152,7 @@
             ButtonSave.FlatStyle = FlatStyle.Flat;
             ButtonSave.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 204);
             ButtonSave.ForeColor = Color.Black;
-            ButtonSave.Location = new Point(354, 198);
+            ButtonSave.Location = new Point(353, 277);
             ButtonSave.Name = "ButtonSave";
             ButtonSave.Size = new Size(139, 41);
             ButtonSave.TabIndex = 14;
@@ -160,11 +161,22 @@
             ButtonSave.UseVisualStyleBackColor = false;
             ButtonSave.Click += ButtonSave_Click;
             // 
+            // label7
+            // 
+            label7.AutoSize = true;
+            label7.Font = new Font("Segoe UI Black", 24F, FontStyle.Bold, GraphicsUnit.Point, 204);
+            label7.Location = new Point(135, 9);
+            label7.Name = "label7";
+            label7.Size = new Size(567, 54);
+            label7.TabIndex = 28;
+            label7.Text = "Информация о предметах";
+            // 
             // FormSubjects
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 250);
+            ClientSize = new Size(800, 334);
+            Controls.Add(label7);
             Controls.Add(ButtonDel);
             Controls.Add(ButtonUpd);
             Controls.Add(ButtonSave);
@@ -186,5 +198,6 @@
         private CustomControls.RJControls.RJButton ButtonDel;
         private CustomControls.RJControls.RJButton ButtonUpd;
         private CustomControls.RJControls.RJButton ButtonSave;
+        private Label label7;
     }
 }

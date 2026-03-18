@@ -38,12 +38,13 @@
             label4 = new Label();
             rjButton1 = new CustomControls.RJControls.RJButton();
             ButtonAddLevel = new CustomControls.RJControls.RJButton();
+            label7 = new Label();
             ((System.ComponentModel.ISupportInitialize)numericUpDownAge).BeginInit();
             SuspendLayout();
             // 
             // textBoxName
             // 
-            textBoxName.Location = new Point(83, 42);
+            textBoxName.Location = new Point(81, 78);
             textBoxName.Name = "textBoxName";
             textBoxName.Size = new Size(520, 27);
             textBoxName.TabIndex = 0;
@@ -52,7 +53,7 @@
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 204);
-            label1.Location = new Point(12, 41);
+            label1.Location = new Point(10, 77);
             label1.Name = "label1";
             label1.Size = new Size(65, 28);
             label1.TabIndex = 1;
@@ -61,7 +62,7 @@
             // numericUpDownAge
             // 
             numericUpDownAge.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point, 204);
-            numericUpDownAge.Location = new Point(112, 101);
+            numericUpDownAge.Location = new Point(110, 137);
             numericUpDownAge.Name = "numericUpDownAge";
             numericUpDownAge.Size = new Size(150, 27);
             numericUpDownAge.TabIndex = 2;
@@ -70,7 +71,7 @@
             // 
             label2.AutoSize = true;
             label2.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 204);
-            label2.Location = new Point(12, 100);
+            label2.Location = new Point(10, 136);
             label2.Name = "label2";
             label2.Size = new Size(94, 28);
             label2.TabIndex = 3;
@@ -78,7 +79,7 @@
             // 
             // textBoxPhone
             // 
-            textBoxPhone.Location = new Point(201, 160);
+            textBoxPhone.Location = new Point(199, 196);
             textBoxPhone.Name = "textBoxPhone";
             textBoxPhone.Size = new Size(125, 27);
             textBoxPhone.TabIndex = 4;
@@ -87,7 +88,7 @@
             // 
             label3.AutoSize = true;
             label3.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 204);
-            label3.Location = new Point(12, 159);
+            label3.Location = new Point(10, 195);
             label3.Name = "label3";
             label3.Size = new Size(183, 28);
             label3.TabIndex = 5;
@@ -96,7 +97,7 @@
             // comboBox1
             // 
             comboBox1.FormattingEnabled = true;
-            comboBox1.Location = new Point(116, 214);
+            comboBox1.Location = new Point(114, 250);
             comboBox1.Name = "comboBox1";
             comboBox1.Size = new Size(151, 28);
             comboBox1.TabIndex = 6;
@@ -105,7 +106,7 @@
             // 
             label4.AutoSize = true;
             label4.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 204);
-            label4.Location = new Point(12, 214);
+            label4.Location = new Point(10, 250);
             label4.Name = "label4";
             label4.Size = new Size(98, 28);
             label4.TabIndex = 7;
@@ -122,7 +123,7 @@
             rjButton1.FlatStyle = FlatStyle.Flat;
             rjButton1.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 204);
             rjButton1.ForeColor = Color.Black;
-            rjButton1.Location = new Point(12, 269);
+            rjButton1.Location = new Point(10, 305);
             rjButton1.Name = "rjButton1";
             rjButton1.Size = new Size(188, 50);
             rjButton1.TabIndex = 8;
@@ -142,20 +143,31 @@
             ButtonAddLevel.FlatStyle = FlatStyle.Flat;
             ButtonAddLevel.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point, 204);
             ButtonAddLevel.ForeColor = Color.Black;
-            ButtonAddLevel.Location = new Point(455, 269);
+            ButtonAddLevel.Location = new Point(408, 305);
             ButtonAddLevel.Name = "ButtonAddLevel";
-            ButtonAddLevel.Size = new Size(357, 50);
+            ButtonAddLevel.Size = new Size(278, 50);
             ButtonAddLevel.TabIndex = 9;
-            ButtonAddLevel.Text = "Нет нужного уровня для ученика?Добавь свой";
+            ButtonAddLevel.Text = "Добавить новый уровень ученика";
             ButtonAddLevel.TextColor = Color.Black;
             ButtonAddLevel.UseVisualStyleBackColor = false;
             ButtonAddLevel.Click += ButtonAddLevel_Click;
+            // 
+            // label7
+            // 
+            label7.AutoSize = true;
+            label7.Font = new Font("Segoe UI Black", 24F, FontStyle.Bold, GraphicsUnit.Point, 204);
+            label7.Location = new Point(101, 9);
+            label7.Name = "label7";
+            label7.Size = new Size(538, 54);
+            label7.TabIndex = 28;
+            label7.Text = "Информация об ученике";
             // 
             // FormStudent
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(837, 344);
+            ClientSize = new Size(716, 371);
+            Controls.Add(label7);
             Controls.Add(ButtonAddLevel);
             Controls.Add(rjButton1);
             Controls.Add(label4);
@@ -185,5 +197,6 @@
         private Label label4;
         private CustomControls.RJControls.RJButton rjButton1;
         private CustomControls.RJControls.RJButton ButtonAddLevel;
+        private Label label7;
     }
 }

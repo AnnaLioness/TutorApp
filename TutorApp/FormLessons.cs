@@ -96,7 +96,7 @@ namespace TutorApp
             dataGridView.Columns.Add(new DataGridViewTextBoxColumn
             {
                 Name = "TypeName",
-                HeaderText = "Тип занятия",
+                HeaderText = "Направление отработки",
 
             });
 
