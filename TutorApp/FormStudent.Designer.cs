@@ -179,7 +179,7 @@
             Controls.Add(label1);
             Controls.Add(textBoxName);
             Name = "FormStudent";
-            Text = "FormStudent";
+            Text = "Ученик";
             ((System.ComponentModel.ISupportInitialize)numericUpDownAge).EndInit();
             ResumeLayout(false);
             PerformLayout();

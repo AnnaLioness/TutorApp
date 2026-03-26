@@ -184,7 +184,7 @@
             Controls.Add(textBox1);
             Controls.Add(dataGridView);
             Name = "FormSubjects";
-            Text = "FormSubjects";
+            Text = "Предметы";
             ((System.ComponentModel.ISupportInitialize)dataGridView).EndInit();
             ResumeLayout(false);
             PerformLayout();

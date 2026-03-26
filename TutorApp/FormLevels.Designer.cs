@@ -184,7 +184,7 @@
             Controls.Add(textBox1);
             Controls.Add(dataGridView);
             Name = "FormLevels";
-            Text = "FormLevels";
+            Text = "Уровни владения и сложности";
             ((System.ComponentModel.ISupportInitialize)dataGridView).EndInit();
             ResumeLayout(false);
             PerformLayout();

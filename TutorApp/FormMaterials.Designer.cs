@@ -167,7 +167,7 @@
             Controls.Add(ButtonAdd);
             Controls.Add(label1);
             Name = "FormMaterials";
-            Text = "FormMaterials";
+            Text = "Материалы";
             ((System.ComponentModel.ISupportInitialize)dataGridView).EndInit();
             ResumeLayout(false);
             PerformLayout();

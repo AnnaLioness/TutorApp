@@ -168,7 +168,7 @@
             Controls.Add(label1);
             Controls.Add(ButtonAdd);
             Name = "FormLessons";
-            Text = "FormLessons";
+            Text = "Уроки";
             ((System.ComponentModel.ISupportInitialize)dataGridView).EndInit();
             ResumeLayout(false);
             PerformLayout();

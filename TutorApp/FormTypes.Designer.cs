@@ -28,9 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle5 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle6 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
             dataGridView = new CustomControls.RJControls.RJDataGridView();
             comboBox1 = new ComboBox();
             label1 = new Label();
@@ -48,20 +48,20 @@
             // 
             dataGridView.AllowUserToAddRows = false;
             dataGridView.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle4.BackColor = Color.FromArgb(240, 240, 240);
-            dataGridViewCellStyle4.Font = new Font("Segoe UI", 9F);
-            dataGridViewCellStyle4.ForeColor = Color.Black;
-            dataGridView.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle1.BackColor = Color.FromArgb(240, 240, 240);
+            dataGridViewCellStyle1.Font = new Font("Segoe UI", 9F);
+            dataGridViewCellStyle1.ForeColor = Color.Black;
+            dataGridView.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             dataGridView.BackgroundColor = Color.White;
             dataGridView.BorderStyle = BorderStyle.None;
-            dataGridViewCellStyle5.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle5.BackColor = Color.DeepSkyBlue;
-            dataGridViewCellStyle5.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 204);
-            dataGridViewCellStyle5.ForeColor = Color.Black;
-            dataGridViewCellStyle5.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle5.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle5.WrapMode = DataGridViewTriState.True;
-            dataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = Color.DeepSkyBlue;
+            dataGridViewCellStyle2.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 204);
+            dataGridViewCellStyle2.ForeColor = Color.Black;
+            dataGridViewCellStyle2.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.True;
+            dataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             dataGridView.ColumnHeadersHeight = 30;
             dataGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             dataGridView.EnableHeadersVisualStyles = false;
@@ -75,12 +75,12 @@
             dataGridView.ReadOnly = true;
             dataGridView.RowHeadersVisible = false;
             dataGridView.RowHeadersWidth = 51;
-            dataGridViewCellStyle6.BackColor = Color.White;
-            dataGridViewCellStyle6.Font = new Font("Segoe UI", 9F);
-            dataGridViewCellStyle6.ForeColor = Color.Black;
-            dataGridViewCellStyle6.SelectionBackColor = Color.FromArgb(100, 120, 200);
-            dataGridViewCellStyle6.SelectionForeColor = Color.White;
-            dataGridView.RowsDefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle3.BackColor = Color.White;
+            dataGridViewCellStyle3.Font = new Font("Segoe UI", 9F);
+            dataGridViewCellStyle3.ForeColor = Color.Black;
+            dataGridViewCellStyle3.SelectionBackColor = Color.FromArgb(100, 120, 200);
+            dataGridViewCellStyle3.SelectionForeColor = Color.White;
+            dataGridView.RowsDefaultCellStyle = dataGridViewCellStyle3;
             dataGridView.RowsFont = new Font("Segoe UI", 9F);
             dataGridView.RowsForeColor = Color.Black;
             dataGridView.Size = new Size(328, 227);
@@ -229,7 +229,7 @@
             Controls.Add(comboBox1);
             Controls.Add(dataGridView);
             Name = "FormTypes";
-            Text = "FormType";
+            Text = "Направления";
             ((System.ComponentModel.ISupportInitialize)dataGridView).EndInit();
             ResumeLayout(false);
             PerformLayout();

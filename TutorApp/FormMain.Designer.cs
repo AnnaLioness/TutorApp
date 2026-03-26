@@ -124,7 +124,7 @@
             Controls.Add(Lessons);
             Controls.Add(Students);
             Name = "FormMain";
-            Text = "Form1";
+            Text = "Главная";
             ResumeLayout(false);
         }
 

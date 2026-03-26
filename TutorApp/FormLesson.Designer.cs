@@ -261,7 +261,7 @@
             Controls.Add(dateTimePickerDate);
             Controls.Add(ButtonAddType);
             Name = "FormLesson";
-            Text = "FormLesson";
+            Text = "Урок";
             ((System.ComponentModel.ISupportInitialize)numericPrice).EndInit();
             ResumeLayout(false);
             PerformLayout();

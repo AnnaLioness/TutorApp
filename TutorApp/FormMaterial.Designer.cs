@@ -325,7 +325,7 @@
             Controls.Add(label1);
             Controls.Add(textBoxTitle);
             Name = "FormMaterial";
-            Text = "FormMaterial";
+            Text = "Материал";
             ResumeLayout(false);
             PerformLayout();
         }
