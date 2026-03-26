@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using PdfSharp.Fonts;
 using Repositories;
 using Repositories.Implementations;
 using Services;
@@ -17,6 +18,7 @@ namespace TutorApp
         [STAThread]
         static void Main()
         {
+            GlobalFontSettings.UseWindowsFontsUnderWindows = true;
             // To customize application configuration such as set high DPI settings or default font,
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
@@ -48,6 +50,7 @@ namespace TutorApp
             services.AddTransient<LessonService>();
             services.AddTransient<MaterialService>();
             services.AddTransient<PublicationService>();
+            services.AddTransient<ReportService>();
             services.AddTransient<FormMain>();
             services.AddTransient<FormStudents>();
             services.AddTransient<FormStudent>();
@@ -59,6 +62,7 @@ namespace TutorApp
             services.AddTransient<FormSubjects>();
             services.AddTransient<FormMaterials>();
             services.AddTransient<FormMaterial>();
+            services.AddTransient<FormReport>();
             ServiceProvider = services.BuildServiceProvider();
 
             // Создаём базу данных

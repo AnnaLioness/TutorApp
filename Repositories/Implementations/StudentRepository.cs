@@ -93,5 +93,9 @@ namespace Repositories.Implementations
                 .OrderBy(s => s.FullName)
                 .ToListAsync();
         }
+        public async Task<int> GetCountAsync()
+        {
+            return await _context.Students.CountAsync();
+        }
     }
 }

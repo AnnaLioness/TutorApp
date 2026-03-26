@@ -211,5 +211,15 @@ namespace Repositories.Implementations
                 .Where(s => s >= desiredTime)
                 .FirstOrDefault();
         }
+        public async Task<List<LessonModel>> GetCompletedLessonsByDateRange(DateOnly start, DateOnly end)
+        {
+            return await _context.Lessons
+                .Where(l => l.Status == LessonStatus.Проведён
+                    && l.Date >= start
+                    && l.Date <= end)
+                .Include(l => l.Type)
+                .Include(l => l.Student)
+                .ToListAsync();
+        }
     }
 }

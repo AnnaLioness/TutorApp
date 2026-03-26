@@ -31,6 +31,7 @@
             Students = new CustomControls.RJControls.RJButton();
             Lessons = new CustomControls.RJControls.RJButton();
             ButtonMaterials = new CustomControls.RJControls.RJButton();
+            ButtonReport = new CustomControls.RJControls.RJButton();
             SuspendLayout();
             // 
             // Students
@@ -93,11 +94,32 @@
             ButtonMaterials.UseVisualStyleBackColor = false;
             ButtonMaterials.Click += ButtonMaterials_Click;
             // 
+            // ButtonReport
+            // 
+            ButtonReport.BackColor = Color.DeepSkyBlue;
+            ButtonReport.BackgroundColor = Color.DeepSkyBlue;
+            ButtonReport.BorderColor = Color.PaleVioletRed;
+            ButtonReport.BorderRadius = 10;
+            ButtonReport.BorderSize = 0;
+            ButtonReport.FlatAppearance.BorderSize = 0;
+            ButtonReport.FlatStyle = FlatStyle.Flat;
+            ButtonReport.Font = new Font("Segoe UI Black", 12F, FontStyle.Bold, GraphicsUnit.Point, 204);
+            ButtonReport.ForeColor = Color.Black;
+            ButtonReport.Location = new Point(290, 261);
+            ButtonReport.Name = "ButtonReport";
+            ButtonReport.Size = new Size(219, 50);
+            ButtonReport.TabIndex = 3;
+            ButtonReport.Text = "Отчёт и статистика";
+            ButtonReport.TextColor = Color.Black;
+            ButtonReport.UseVisualStyleBackColor = false;
+            ButtonReport.Click += ButtonReport_Click;
+            // 
             // FormMain
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(ButtonReport);
             Controls.Add(ButtonMaterials);
             Controls.Add(Lessons);
             Controls.Add(Students);
@@ -111,5 +133,6 @@
         private CustomControls.RJControls.RJButton Students;
         private CustomControls.RJControls.RJButton Lessons;
         private CustomControls.RJControls.RJButton ButtonMaterials;
+        private CustomControls.RJControls.RJButton ButtonReport;
     }
 }

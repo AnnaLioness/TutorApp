@@ -53,5 +53,20 @@ namespace TutorApp
                     "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+        private void ButtonReport_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                var reportForm = Program.ServiceProvider.GetRequiredService<FormReport>();
+                reportForm.Show(); // Открываем модально
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Ошибка при открытии формы: {ex.Message}",
+                    "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
     }
 }
