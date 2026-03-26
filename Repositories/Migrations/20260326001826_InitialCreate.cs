@@ -88,7 +88,7 @@ namespace Repositories.Migrations
                     Date = table.Column<DateOnly>(type: "TEXT", nullable: false),
                     Time = table.Column<TimeOnly>(type: "TEXT", nullable: false),
                     Price = table.Column<int>(type: "INTEGER", nullable: false),
-                    Comment = table.Column<string>(type: "TEXT", nullable: false),
+                    Comment = table.Column<string>(type: "TEXT", nullable: true),
                     Status = table.Column<string>(type: "TEXT", nullable: false),
                     StudentId = table.Column<int>(type: "INTEGER", nullable: false),
                     TypeId = table.Column<int>(type: "INTEGER", nullable: false)
@@ -122,7 +122,9 @@ namespace Repositories.Migrations
                     TypeId = table.Column<int>(type: "INTEGER", nullable: false),
                     LevelId = table.Column<int>(type: "INTEGER", nullable: false),
                     AgeGroup = table.Column<string>(type: "TEXT", nullable: false),
-                    Season = table.Column<string>(type: "TEXT", nullable: false)
+                    Season = table.Column<string>(type: "TEXT", nullable: false),
+                    IsHoliday = table.Column<bool>(type: "INTEGER", nullable: false),
+                    Holiday = table.Column<int>(type: "INTEGER", nullable: true)
                 },
                 constraints: table =>
                 {

@@ -47,7 +47,7 @@ namespace Services.Services
         /// <summary>
         /// Создать новый материал
         /// </summary>
-        public async Task<(bool success, string message, MaterialModel? material)> CreateMaterial(
+        /*public async Task<(bool success, string message, MaterialModel? material)> CreateMaterial(
             string title,
             string description,
             string filePath,
@@ -85,49 +85,146 @@ namespace Services.Services
             await _materialRepository.SaveAsync();
 
             return (true, "Материал создан", material);
-        }
+        }*/
+        public async Task<(bool success, string message, MaterialModel? material)> CreateMaterial(
+    string title,
+    string description,
+    string filePath,
+    int typeId,
+    int levelId,
+    AgeGroup ageGroup,
+    Season season,
+    bool isHoliday,
+    Holiday? holiday)
+        {
+            // Проверяем обязательные поля
+            if (string.IsNullOrWhiteSpace(title))
+                return (false, "Название обязательно", null);
 
+            // Проверяем существование типа
+            var type = await _typeRepository.GetByIdAsync(typeId);
+            if (type == null)
+                return (false, "Тип материала не найден", null);
+
+            // Проверяем существование уровня
+            var level = await _levelRepository.GetByIdAsync(levelId);
+            if (level == null)
+                return (false, "Уровень не найден", null);
+
+            // Проверка праздничных полей
+            if (isHoliday && !holiday.HasValue)
+                return (false, "Для праздничного материала необходимо указать тип праздника", null);
+
+            var material = new MaterialModel
+            {
+                Title = title,
+                Description = description,
+                FilePath = filePath,
+                TypeId = typeId,
+                LevelId = levelId,
+                AgeGroup = ageGroup,
+                Season = season,
+                IsHoliday = isHoliday,
+                Holiday = holiday
+            };
+
+            await _materialRepository.AddAsync(material);
+            await _materialRepository.SaveAsync();
+
+            return (true, "Материал создан", material);
+        }
         /// <summary>
         /// Обновить материал
         /// </summary>
+        /* public async Task<(bool success, string message)> UpdateMaterial(
+             int materialId,
+             string? title = null,
+             string? description = null,
+             string? filePath = null,
+             int? typeId = null,
+             int? levelId = null,
+             AgeGroup? ageGroup = null,
+             Season? season = null)
+         {
+             var material = await _materialRepository.GetByIdAsync(materialId);
+             if (material == null)
+                 return (false, "Материал не найден");
+
+             if (title != null)
+                 material.Title = title;
+             if (description != null)
+                 material.Description = description;
+             if (filePath != null)
+                 material.FilePath = filePath;
+             if (typeId.HasValue)
+             {
+                 var type = await _typeRepository.GetByIdAsync(typeId.Value);
+                 if (type == null)
+                     return (false, "Тип не найден");
+                 material.TypeId = typeId.Value;
+             }
+             if (levelId.HasValue)
+             {
+                 var level = await _levelRepository.GetByIdAsync(levelId.Value);
+                 if (level == null)
+                     return (false, "Уровень не найден");
+                 material.LevelId = levelId.Value;
+             }
+             if (ageGroup.HasValue)
+                 material.AgeGroup = ageGroup.Value;
+             if (season.HasValue)
+                 material.Season = season.Value;
+
+             await _materialRepository.UpdateAsync(material);
+             await _materialRepository.SaveAsync();
+
+             return (true, "Материал обновлён");
+         }*/
         public async Task<(bool success, string message)> UpdateMaterial(
-            int materialId,
-            string? title = null,
-            string? description = null,
-            string? filePath = null,
-            int? typeId = null,
-            int? levelId = null,
-            AgeGroup? ageGroup = null,
-            Season? season = null)
+     int id,
+     string title,
+     string description,
+     string filePath,
+     int typeId,
+     int levelId,
+     AgeGroup ageGroup,
+     Season season,
+     bool isHoliday,
+     Holiday? holiday)
         {
-            var material = await _materialRepository.GetByIdAsync(materialId);
+            // Проверяем существование материала
+            var material = await _materialRepository.GetByIdAsync(id);
             if (material == null)
                 return (false, "Материал не найден");
 
-            if (title != null)
-                material.Title = title;
-            if (description != null)
-                material.Description = description;
-            if (filePath != null)
-                material.FilePath = filePath;
-            if (typeId.HasValue)
-            {
-                var type = await _typeRepository.GetByIdAsync(typeId.Value);
-                if (type == null)
-                    return (false, "Тип не найден");
-                material.TypeId = typeId.Value;
-            }
-            if (levelId.HasValue)
-            {
-                var level = await _levelRepository.GetByIdAsync(levelId.Value);
-                if (level == null)
-                    return (false, "Уровень не найден");
-                material.LevelId = levelId.Value;
-            }
-            if (ageGroup.HasValue)
-                material.AgeGroup = ageGroup.Value;
-            if (season.HasValue)
-                material.Season = season.Value;
+            // Проверяем обязательные поля
+            if (string.IsNullOrWhiteSpace(title))
+                return (false, "Название обязательно");
+
+            // Проверяем существование типа
+            var type = await _typeRepository.GetByIdAsync(typeId);
+            if (type == null)
+                return (false, "Тип материала не найден");
+
+            // Проверяем существование уровня
+            var level = await _levelRepository.GetByIdAsync(levelId);
+            if (level == null)
+                return (false, "Уровень не найден");
+
+            // Проверка праздничных полей
+            if (isHoliday && !holiday.HasValue)
+                return (false, "Для праздничного материала необходимо указать тип праздника");
+
+            // Обновляем поля
+            material.Title = title;
+            material.Description = description;
+            material.FilePath = filePath;
+            material.TypeId = typeId;
+            material.LevelId = levelId;
+            material.AgeGroup = ageGroup;
+            material.Season = season;
+            material.IsHoliday = isHoliday;
+            material.Holiday = holiday;
 
             await _materialRepository.UpdateAsync(material);
             await _materialRepository.SaveAsync();

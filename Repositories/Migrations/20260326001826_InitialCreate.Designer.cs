@@ -11,8 +11,8 @@ using Repositories;
 namespace Repositories.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20260318223833_Nullable")]
-    partial class Nullable
+    [Migration("20260326001826_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -89,6 +89,12 @@ namespace Repositories.Migrations
                     b.Property<string>("FilePath")
                         .IsRequired()
                         .HasColumnType("TEXT");
+
+                    b.Property<int?>("Holiday")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<bool>("IsHoliday")
+                        .HasColumnType("INTEGER");
 
                     b.Property<int>("LevelId")
                         .HasColumnType("INTEGER");

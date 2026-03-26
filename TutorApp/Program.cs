@@ -57,6 +57,8 @@ namespace TutorApp
             services.AddTransient<FormStudents>();
             services.AddTransient<FormTypes>();
             services.AddTransient<FormSubjects>();
+            services.AddTransient<FormMaterials>();
+            services.AddTransient<FormMaterial>();
             ServiceProvider = services.BuildServiceProvider();
 
             // Создаём базу данных

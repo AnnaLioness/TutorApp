@@ -43,6 +43,9 @@
             label6 = new Label();
             textBox1 = new TextBox();
             label7 = new Label();
+            label8 = new Label();
+            comboBoxSubject = new ComboBox();
+            label9 = new Label();
             ((System.ComponentModel.ISupportInitialize)numericPrice).BeginInit();
             SuspendLayout();
             // 
@@ -57,7 +60,7 @@
             ButtonAddType.FlatStyle = FlatStyle.Flat;
             ButtonAddType.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point, 204);
             ButtonAddType.ForeColor = Color.Black;
-            ButtonAddType.Location = new Point(316, 366);
+            ButtonAddType.Location = new Point(320, 412);
             ButtonAddType.Name = "ButtonAddType";
             ButtonAddType.Size = new Size(316, 50);
             ButtonAddType.TabIndex = 12;
@@ -115,7 +118,7 @@
             // comboBoxType
             // 
             comboBoxType.FormattingEnabled = true;
-            comboBoxType.Location = new Point(264, 264);
+            comboBoxType.Location = new Point(268, 310);
             comboBoxType.Name = "comboBoxType";
             comboBoxType.Size = new Size(151, 28);
             comboBoxType.TabIndex = 19;
@@ -134,7 +137,7 @@
             // 
             label4.AutoSize = true;
             label4.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 204);
-            label4.Location = new Point(2, 264);
+            label4.Location = new Point(6, 310);
             label4.Name = "label4";
             label4.Size = new Size(256, 28);
             label4.TabIndex = 21;
@@ -151,7 +154,7 @@
             rjButton1.FlatStyle = FlatStyle.Flat;
             rjButton1.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
             rjButton1.ForeColor = Color.Black;
-            rjButton1.Location = new Point(2, 363);
+            rjButton1.Location = new Point(6, 409);
             rjButton1.Name = "rjButton1";
             rjButton1.Size = new Size(223, 50);
             rjButton1.TabIndex = 22;
@@ -181,7 +184,7 @@
             // 
             label6.AutoSize = true;
             label6.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 204);
-            label6.Location = new Point(2, 310);
+            label6.Location = new Point(6, 356);
             label6.Name = "label6";
             label6.Size = new Size(155, 28);
             label6.TabIndex = 25;
@@ -189,7 +192,7 @@
             // 
             // textBox1
             // 
-            textBox1.Location = new Point(157, 311);
+            textBox1.Location = new Point(161, 357);
             textBox1.Multiline = true;
             textBox1.Name = "textBox1";
             textBox1.ScrollBars = ScrollBars.Vertical;
@@ -206,11 +209,42 @@
             label7.TabIndex = 27;
             label7.Text = "Информация об уроке";
             // 
+            // label8
+            // 
+            label8.AutoSize = true;
+            label8.Font = new Font("Segoe UI Black", 12F, FontStyle.Bold);
+            label8.Location = new Point(7, 263);
+            label8.Name = "label8";
+            label8.Size = new Size(0, 28);
+            label8.TabIndex = 29;
+            // 
+            // comboBoxSubject
+            // 
+            comboBoxSubject.FormattingEnabled = true;
+            comboBoxSubject.Location = new Point(128, 265);
+            comboBoxSubject.Name = "comboBoxSubject";
+            comboBoxSubject.Size = new Size(291, 28);
+            comboBoxSubject.TabIndex = 28;
+            comboBoxSubject.SelectedIndexChanged += comboBoxSubject_SelectedIndexChanged;
+            // 
+            // label9
+            // 
+            label9.AutoSize = true;
+            label9.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 204);
+            label9.Location = new Point(3, 265);
+            label9.Name = "label9";
+            label9.Size = new Size(103, 28);
+            label9.TabIndex = 31;
+            label9.Text = "Предмет:";
+            // 
             // FormLesson
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(647, 433);
+            ClientSize = new Size(647, 475);
+            Controls.Add(label9);
+            Controls.Add(label8);
+            Controls.Add(comboBoxSubject);
             Controls.Add(label7);
             Controls.Add(textBox1);
             Controls.Add(label6);
@@ -250,5 +284,8 @@
         private Label label6;
         private TextBox textBox1;
         private Label label7;
+        private Label label8;
+        private ComboBox comboBoxSubject;
+        private Label label9;
     }
 }

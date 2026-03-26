@@ -30,6 +30,7 @@
         {
             Students = new CustomControls.RJControls.RJButton();
             Lessons = new CustomControls.RJControls.RJButton();
+            ButtonMaterials = new CustomControls.RJControls.RJButton();
             SuspendLayout();
             // 
             // Students
@@ -72,11 +73,32 @@
             Lessons.UseVisualStyleBackColor = false;
             Lessons.Click += Lessons_Click;
             // 
+            // ButtonMaterials
+            // 
+            ButtonMaterials.BackColor = Color.DeepSkyBlue;
+            ButtonMaterials.BackgroundColor = Color.DeepSkyBlue;
+            ButtonMaterials.BorderColor = Color.PaleVioletRed;
+            ButtonMaterials.BorderRadius = 10;
+            ButtonMaterials.BorderSize = 0;
+            ButtonMaterials.FlatAppearance.BorderSize = 0;
+            ButtonMaterials.FlatStyle = FlatStyle.Flat;
+            ButtonMaterials.Font = new Font("Segoe UI Black", 12F, FontStyle.Bold, GraphicsUnit.Point, 204);
+            ButtonMaterials.ForeColor = Color.Black;
+            ButtonMaterials.Location = new Point(304, 184);
+            ButtonMaterials.Name = "ButtonMaterials";
+            ButtonMaterials.Size = new Size(188, 50);
+            ButtonMaterials.TabIndex = 2;
+            ButtonMaterials.Text = "Материалы";
+            ButtonMaterials.TextColor = Color.Black;
+            ButtonMaterials.UseVisualStyleBackColor = false;
+            ButtonMaterials.Click += ButtonMaterials_Click;
+            // 
             // FormMain
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(ButtonMaterials);
             Controls.Add(Lessons);
             Controls.Add(Students);
             Name = "FormMain";
@@ -88,5 +110,6 @@
 
         private CustomControls.RJControls.RJButton Students;
         private CustomControls.RJControls.RJButton Lessons;
+        private CustomControls.RJControls.RJButton ButtonMaterials;
     }
 }

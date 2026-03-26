@@ -24,6 +24,8 @@ namespace TutorApp
         private List<TypeModel> _types = new();
         private List<SubjectModel> _subjects = new();
         private bool _isDeleting = false;
+        private bool _isCompleting = false;
+        private bool _isCanceling = false;
         private readonly Dictionary<DayOfWeek, string> _russianDays = new()
         {
             { DayOfWeek.Monday, "Понедельник" },
@@ -193,6 +195,7 @@ namespace TutorApp
         {
             try
             {
+               
                 dataGridView.Rows.Clear();
 
                 foreach (var lesson in _lessons.OrderBy(l => l.Date).ThenBy(l => l.Time))
@@ -220,6 +223,7 @@ namespace TutorApp
                     };
 
                     int rowIndex = dataGridView.Rows.Add(
+                    
                         lesson.Id,
                         lesson.Date.ToString("dd.MM.yyyy"),
                         dayOfWeek,
@@ -230,10 +234,12 @@ namespace TutorApp
                         lesson.Price,
                         statusText,
                         lesson.Comment ?? "",
-                        "✅ Провести",
-                        "❌ Отменить",
-                        "🗑️ Удалить"
+                       "✅ Провести",
+                       "❌ Отменить",
+                       "🗑️ Удалить" 
                     );
+                    // Добавляем кнопки ТОЛЬКО если урок запланирован
+                    
 
                     // Цвет фона для статуса
                     if (lesson.Status == LessonStatus.Проведён)
@@ -245,12 +251,14 @@ namespace TutorApp
                 }
 
                 dataGridView.ClearSelection();
+                dataGridView.CurrentCell = null;
             }
             catch (Exception ex)
             {
                 MessageBox.Show($"Ошибка при отображении данных: {ex.Message}",
                     "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+            
         }
         private async void DataGridView_CellClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -262,21 +270,48 @@ namespace TutorApp
             if (lesson == null) return;
 
             var columnName = dataGridView.Columns[e.ColumnIndex].Name;
-
-            if (columnName == "CompleteButton")
-                await CompleteLesson(lesson);
-            else if (columnName == "CancelButton")
-                await CancelLesson(lesson);
-            else if (columnName == "DeleteButton")
+            if (columnName == "CompleteButton" && lesson.Status != LessonStatus.Запланирован)
             {
-                _isDeleting = true;
-                await DeleteLesson(lesson);
-                _ = Task.Delay(500).ContinueWith(_ => _isDeleting = false,
-                    TaskScheduler.FromCurrentSynchronizationContext());
+                return;  // игнорируем клик
+            }
+
+            if (columnName == "CancelButton" && lesson.Status != LessonStatus.Запланирован)
+            {
+                return;
+            }
+            if (columnName != null)
+            {
+
+                if (columnName == "CompleteButton")
+                {
+                    _isCompleting = true;
+                    await CompleteLesson(lesson);
+                    _ = Task.Delay(1000).ContinueWith(_ => { _isCompleting = false; },
+                       TaskScheduler.FromCurrentSynchronizationContext());
+                }
+                else if (columnName == "CancelButton")
+                {
+                    _isCanceling = true;
+                    await CancelLesson(lesson);
+                    _ = Task.Delay(500).ContinueWith(_ => { _isCanceling = false; },
+                        TaskScheduler.FromCurrentSynchronizationContext());
+                }
+
+                else if (columnName == "DeleteButton")
+                {
+                    _isDeleting = true;
+                    await DeleteLesson(lesson);
+                    _ = Task.Delay(500).ContinueWith(_ => { _isDeleting = false; },
+                        TaskScheduler.FromCurrentSynchronizationContext());
+                }
             }
         }
         private async Task CompleteLesson(LessonModel lesson)
         {
+
+            var result = MessageBox.Show($"Отметить урок как проведённый?", "Подтверждение",
+                MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (result != DialogResult.Yes) return;
             if (lesson.Status != LessonStatus.Запланирован)
             {
                 MessageBox.Show("Можно провести только запланированный урок", "Ошибка",
@@ -284,21 +319,46 @@ namespace TutorApp
                 return;
             }
 
-            var result = MessageBox.Show($"Отметить урок как проведённый?", "Подтверждение",
-                MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            try
+            {
+                Cursor = Cursors.WaitCursor;
 
-            if (result != DialogResult.Yes) return;
+                var (success, message) = await _lessonService.CompleteLesson(lesson.Id);
 
-            var (success, message) = await _lessonService.CompleteLesson(lesson.Id);
+                if (success)
+                {
+                    _lessons = (List<LessonModel>)await _lessonService.GetAllLessons();
+                    // Обновляем отображение
+                    DisplayLessons();
+                    
 
-            if (success)
-                LoadDataAsync();
-            else
-                MessageBox.Show(message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Ученик успешно проведён", "Успех",
+                        MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else
+                {
+                    MessageBox.Show(message, "Ошибка",
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Ошибка при проведении: {ex.Message}",
+                    "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                Cursor = Cursors.Default;
+            }
         }
 
         private async Task CancelLesson(LessonModel lesson)
         {
+           
+
+            var result = MessageBox.Show($"Отменить урок?", "Подтверждение",
+                MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (result != DialogResult.Yes) return;
             if (lesson.Status != LessonStatus.Запланирован)
             {
                 MessageBox.Show("Можно отменить только запланированный урок", "Ошибка",
@@ -306,17 +366,39 @@ namespace TutorApp
                 return;
             }
 
-            var result = MessageBox.Show($"Отменить урок?", "Подтверждение",
-                MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            try
+            {
+                Cursor = Cursors.WaitCursor;
 
-            if (result != DialogResult.Yes) return;
+                var (success, message) = await _lessonService.CancelLesson(lesson.Id);
 
-            var (success, message) = await _lessonService.CancelLesson(lesson.Id);
+                if (success)
+                {
+                    
+                    _lessons = (List <LessonModel>)await _lessonService.GetAllLessons();
 
-            if (success)
-                LoadDataAsync();
-            else
-                MessageBox.Show(message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    // Обновляем отображение
+                    DisplayLessons();
+                   
+
+                    MessageBox.Show("Ученик успешно отменён", "Успех",
+                        MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else
+                {
+                    MessageBox.Show(message, "Ошибка",
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Ошибка при отмене: {ex.Message}",
+                    "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                Cursor = Cursors.Default;
+            }
         }
 
         private async Task DeleteLesson(LessonModel lesson)
@@ -326,9 +408,38 @@ namespace TutorApp
 
             if (result != DialogResult.Yes) return;
 
-            // Здесь должен быть метод удаления в сервисе
-            _lessons.Remove(lesson);
-            DisplayLessons();
+            try
+            {
+                Cursor = Cursors.WaitCursor;
+
+                var (success, message) = await _lessonService.DeleteLesson(lesson.Id);
+
+                if (success)
+                {
+                    // Удаляем из локального списка
+                    _lessons.Remove(lesson);
+
+                    // Обновляем отображение
+                    DisplayLessons();
+
+                    MessageBox.Show("Ученик успешно удален", "Успех",
+                        MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else
+                {
+                    MessageBox.Show(message, "Ошибка",
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Ошибка при удалении: {ex.Message}",
+                    "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                Cursor = Cursors.Default;
+            }
         }
 
         private void ButtonAdd_Click(object sender, EventArgs e)
@@ -381,7 +492,7 @@ namespace TutorApp
                 var lessonForm = Program.ServiceProvider.GetRequiredService<FormLesson>();
 
                 // Передаем ученика для редактирования
-                lessonForm.SetLesson(lesson, _types, _students);
+                lessonForm.SetLesson(lesson, _subjects, _types, _students);
 
                 // Показываем форму и ждем результат
                 if (lessonForm.ShowDialog() == DialogResult.OK)

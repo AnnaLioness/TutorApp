@@ -20,5 +20,7 @@ namespace Models.Models
         public LevelModel Level { get; set; }
         public AgeGroup AgeGroup { get; set; }
         public Season Season { get; set; }
+        public bool IsHoliday { get; set; }
+        public Holiday? Holiday { get; set; }
     }
 }

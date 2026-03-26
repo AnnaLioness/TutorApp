@@ -246,5 +246,17 @@ namespace Services.Services
         {
             return await _lessonRepository.GetAvailableTimeSlots(date);
         }
+        public async Task<(bool success, string message)> DeleteLesson(int lessonId)
+        {
+            var lesson = await _lessonRepository.GetByIdAsync(lessonId);
+            if (lesson == null)
+                return (false, "Урок не найден");
+
+
+            await _lessonRepository.DeleteAsync(lesson);
+            await _lessonRepository.SaveAsync();
+
+            return (true, "Урок удалён");
+        }
     }
 }

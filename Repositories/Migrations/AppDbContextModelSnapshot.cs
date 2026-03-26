@@ -87,6 +87,12 @@ namespace Repositories.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
+                    b.Property<int?>("Holiday")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<bool>("IsHoliday")
+                        .HasColumnType("INTEGER");
+
                     b.Property<int>("LevelId")
                         .HasColumnType("INTEGER");
 

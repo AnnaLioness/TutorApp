@@ -23,6 +23,7 @@ namespace TutorApp
         private LessonModel? _currentLesson;
         private List<TypeModel> _types;
         private List<StudentModel> _students;
+        private List<SubjectModel> _subjects;
         private bool _isEditMode => _currentLesson != null;
         public FormLesson(LessonService lessonService, DictionaryService dictionaryService, StudentService studentService)
         {
@@ -39,14 +40,19 @@ namespace TutorApp
         }
         public async Task SetupComboBoxes()
         {
-            var types = await _dictionaryService.GetAllTypes();
-            comboBoxType.DataSource = types;
-            comboBoxType.DisplayMember = "TypeName";
-            comboBoxType.ValueMember = "Id";
+            var subjects = await _dictionaryService.GetAllSubjects();
+            comboBoxSubject.DataSource = subjects;
+            comboBoxSubject.DisplayMember = "SubjectName";
+            comboBoxSubject.ValueMember = "Id";
+            /* var types = await _dictionaryService.GetAllTypes();
+             comboBoxType.DataSource = types;
+             comboBoxType.DisplayMember = "TypeName";
+             comboBoxType.ValueMember = "Id";*/
             var students = await _studentService.GetAllStudents();
             comboBoxStudent.DataSource = students;
             comboBoxStudent.DisplayMember = "FullName";
             comboBoxStudent.ValueMember = "Id";
+            comboBoxType.Enabled = false;
         }
         private void SelectTypeAndStudentInComboBox(int typeId, int studentId)
         {
@@ -56,6 +62,8 @@ namespace TutorApp
                 if (type != null)
                 {
                     comboBoxType.SelectedItem = type;
+                    comboBoxSubject.SelectedValue = type.SubjectId;
+                    comboBoxType.Enabled = true;
                 }
                 else if (comboBoxType.Items.Count > 0)
                 {
@@ -149,9 +157,10 @@ namespace TutorApp
                 }
             }
         }
-        public async void SetLesson(LessonModel? lesson, List<TypeModel> types, List<StudentModel> students)
+        public async void SetLesson(LessonModel? lesson, List<SubjectModel> subjects,List<TypeModel> types, List<StudentModel> students)
         {
             _currentLesson = lesson;
+            _subjects = subjects ?? new List<SubjectModel>();
             _types = types ?? new List<TypeModel>();
             _students = students ?? new List<StudentModel>();
 
@@ -160,11 +169,32 @@ namespace TutorApp
 
             if (_isEditMode)
             {
-                
+
                 dateTimePickerDate.Value = _currentLesson.Date.ToDateTime(TimeOnly.MinValue);
                 dateTimePickerTime.Value = DateTime.Today.Add(_currentLesson.Time.ToTimeSpan());
                 numericPrice.Value = _currentLesson.Price;
-                SelectTypeAndStudentInComboBox(_currentLesson.TypeId, _currentLesson.StudentId);
+                //SelectTypeAndStudentInComboBox(_currentLesson.TypeId, _currentLesson.StudentId);
+                if (lesson.Type != null)
+                {
+                    var subject = _subjects.FirstOrDefault(s => s.Id == lesson.Type.SubjectId);
+                    if (subject != null)
+                    {
+                        comboBoxSubject.SelectedItem = subject;
+
+                    }
+                }
+                comboBoxSubject.SelectedIndexChanged += async (s, e) =>
+                {
+                    await LoadTypesForSelectedSubject();
+                    if (comboBoxType.Items.Count > 0 && lesson.Type != null)
+                    {
+                        var typeToSelect = comboBoxType.Items.Cast<TypeModel>()
+                            .FirstOrDefault(t => t.Id == lesson.TypeId);
+                        if (typeToSelect != null)
+                            comboBoxType.SelectedItem = typeToSelect;
+                        comboBoxType.Enabled = true;
+                    }
+                };
             }
             else
             {
@@ -180,6 +210,29 @@ namespace TutorApp
                     comboBoxStudent.SelectedIndex = 0;
                 }
             }
+        }
+
+        private async void comboBoxSubject_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (comboBoxSubject.SelectedItem != null)
+            {
+                await LoadTypesForSelectedSubject();
+                comboBoxType.Enabled = true;
+            }
+        }
+        private async Task LoadTypesForSelectedSubject()
+        {
+            if (comboBoxSubject.SelectedItem == null)
+                return;
+
+            var selectedSubject = (SubjectModel)comboBoxSubject.SelectedItem;
+
+            // Загружаем типы для выбранного предмета
+            var types = await _dictionaryService.GetTypesBySubject(selectedSubject.Id);
+
+            comboBoxType.DataSource = types;
+            comboBoxType.DisplayMember = "TypeName";
+            comboBoxType.ValueMember = "Id";
         }
     }
 }
