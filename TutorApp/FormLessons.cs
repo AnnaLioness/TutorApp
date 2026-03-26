@@ -198,7 +198,7 @@ namespace TutorApp
                
                 dataGridView.Rows.Clear();
 
-                foreach (var lesson in _lessons.OrderBy(l => l.Date).ThenBy(l => l.Time))
+                foreach (var lesson in _lessons.OrderByDescending(l => l.Date).ThenByDescending(l => l.Time))
                 {
                     string studentName = _students.FirstOrDefault(s => s.Id == lesson.StudentId)?.FullName ?? $"[Ученик {lesson.StudentId}]";
 
