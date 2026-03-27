@@ -332,7 +332,7 @@ namespace TutorApp
                     DisplayLessons();
                     
 
-                    MessageBox.Show("Ученик успешно проведён", "Успех",
+                    MessageBox.Show("Урок успешно проведён", "Успех",
                         MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 else

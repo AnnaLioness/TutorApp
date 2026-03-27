@@ -98,7 +98,7 @@ namespace TutorApp
 
             var id = _subjects[index].Id;
 
-            var result = MessageBox.Show("Удалить выбранный уровень?", "Подтверждение", MessageBoxButtons.YesNo);
+            var result = MessageBox.Show("Удалить выбранный предмет?", "Подтверждение", MessageBoxButtons.YesNo);
             if (result == DialogResult.Yes)
             {
                 await _dictionaryService.DeleteSubject(id);

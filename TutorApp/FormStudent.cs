@@ -93,18 +93,21 @@ namespace TutorApp
             {
                 MessageBox.Show("Введите ФИО ученика", "Ошибка",
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
             }
             if (textBoxPhone.Text.Length != 6 && textBoxPhone.Text.Length != 11)
             {
                 MessageBox.Show("Неверный формат номера", "Ошибка",
                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
             }
 
             // Проверка возраста
-            if (numericUpDownAge.Value < 3 || numericUpDownAge.Value > 100)
+            if (numericUpDownAge.Value < 6 || numericUpDownAge.Value > 100)
             {
-                MessageBox.Show("Возраст должен быть от 3 до 100 лет", "Ошибка",
+                MessageBox.Show("Возраст должен быть от 6 до 100 лет", "Ошибка",
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
             }
 
             // Проверка выбора уровня
@@ -112,6 +115,7 @@ namespace TutorApp
             {
                 MessageBox.Show("Нет доступных уровней для выбора. Сначала добавьте уровни в справочник.",
                     "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
             }
             if (_isEditMode)
             {

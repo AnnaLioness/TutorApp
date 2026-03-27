@@ -93,11 +93,13 @@ namespace TutorApp
             {
                 MessageBox.Show("Введите название типа занятия", "Ошибка",
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
             }
             if (!comboBox1.Enabled || comboBox1.SelectedItem == null)
             {
                 MessageBox.Show("Нет доступных предметов для выбора. Сначала добавьте предметы в справочник.",
                     "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
             }
 
             await _dictionaryService.CreateType(textBox1.Text.Trim(), (int)selectedSubj);
@@ -117,11 +119,13 @@ namespace TutorApp
             {
                 MessageBox.Show("Введите название типа занятия", "Ошибка",
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
             }
             if (!comboBox1.Enabled || comboBox1.SelectedItem == null)
             {
                 MessageBox.Show("Нет доступных предметов для выбора. Сначала добавьте предметы в справочник.",
                     "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
             }
 
             await _dictionaryService.UpdateType(id, newTypeName, (int)selectedSubj);

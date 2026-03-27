@@ -108,6 +108,7 @@ namespace TutorApp
             {
                 MessageBox.Show("Нет доступных типов занятий или учеников для выбора. Сначала добавьте учеников или типы занятий.",
                     "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
             }
             if (_isEditMode)
             {
