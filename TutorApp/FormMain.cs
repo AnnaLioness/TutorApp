@@ -68,5 +68,28 @@ namespace TutorApp
                     "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+        private void ButtonVkSettings_Click(object sender, EventArgs e)
+        {
+            using (var form = Program.ServiceProvider.GetRequiredService<FormVkSetup>())
+            {
+                form.ShowDialog();
+            }
+        }
+
+        private void ButtonPublications_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                var publForm = Program.ServiceProvider.GetRequiredService<FormPublications>();
+                publForm.Show(); // Открываем модально
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Ошибка при открытии формы: {ex.Message}",
+                    "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
     }
 }

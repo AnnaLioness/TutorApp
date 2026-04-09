@@ -69,5 +69,11 @@ namespace Services.Services
             var all = await _publicationRepository.GetPublished();
             return all.OrderByDescending(p => p.PublicationDate).Take(count);
         }
+        public async Task<PublicationModel> AddPublication(PublicationModel publication)
+        {
+            await _publicationRepository.AddAsync(publication);
+            await _publicationRepository.SaveAsync();
+            return publication;
+        }
     }
 }

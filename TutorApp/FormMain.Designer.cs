@@ -32,6 +32,8 @@
             Lessons = new CustomControls.RJControls.RJButton();
             ButtonMaterials = new CustomControls.RJControls.RJButton();
             ButtonReport = new CustomControls.RJControls.RJButton();
+            ButtonVkSettings = new CustomControls.RJControls.RJButton();
+            ButtonPublications = new CustomControls.RJControls.RJButton();
             SuspendLayout();
             // 
             // Students
@@ -114,11 +116,53 @@
             ButtonReport.UseVisualStyleBackColor = false;
             ButtonReport.Click += ButtonReport_Click;
             // 
+            // ButtonVkSettings
+            // 
+            ButtonVkSettings.BackColor = Color.DeepSkyBlue;
+            ButtonVkSettings.BackgroundColor = Color.DeepSkyBlue;
+            ButtonVkSettings.BorderColor = Color.PaleVioletRed;
+            ButtonVkSettings.BorderRadius = 10;
+            ButtonVkSettings.BorderSize = 0;
+            ButtonVkSettings.FlatAppearance.BorderSize = 0;
+            ButtonVkSettings.FlatStyle = FlatStyle.Flat;
+            ButtonVkSettings.Font = new Font("Segoe UI Black", 12F, FontStyle.Bold, GraphicsUnit.Point, 204);
+            ButtonVkSettings.ForeColor = Color.Black;
+            ButtonVkSettings.Location = new Point(269, 407);
+            ButtonVkSettings.Name = "ButtonVkSettings";
+            ButtonVkSettings.Size = new Size(272, 50);
+            ButtonVkSettings.TabIndex = 4;
+            ButtonVkSettings.Text = "Настройка работы с Vk";
+            ButtonVkSettings.TextColor = Color.Black;
+            ButtonVkSettings.UseVisualStyleBackColor = false;
+            ButtonVkSettings.Click += ButtonVkSettings_Click;
+            // 
+            // ButtonPublications
+            // 
+            ButtonPublications.BackColor = Color.DeepSkyBlue;
+            ButtonPublications.BackgroundColor = Color.DeepSkyBlue;
+            ButtonPublications.BorderColor = Color.PaleVioletRed;
+            ButtonPublications.BorderRadius = 10;
+            ButtonPublications.BorderSize = 0;
+            ButtonPublications.FlatAppearance.BorderSize = 0;
+            ButtonPublications.FlatStyle = FlatStyle.Flat;
+            ButtonPublications.Font = new Font("Segoe UI Black", 12F, FontStyle.Bold, GraphicsUnit.Point, 204);
+            ButtonPublications.ForeColor = Color.Black;
+            ButtonPublications.Location = new Point(290, 334);
+            ButtonPublications.Name = "ButtonPublications";
+            ButtonPublications.Size = new Size(219, 50);
+            ButtonPublications.TabIndex = 5;
+            ButtonPublications.Text = "Публикации Vk";
+            ButtonPublications.TextColor = Color.Black;
+            ButtonPublications.UseVisualStyleBackColor = false;
+            ButtonPublications.Click += ButtonPublications_Click;
+            // 
             // FormMain
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(800, 507);
+            Controls.Add(ButtonPublications);
+            Controls.Add(ButtonVkSettings);
             Controls.Add(ButtonReport);
             Controls.Add(ButtonMaterials);
             Controls.Add(Lessons);
@@ -134,5 +178,7 @@
         private CustomControls.RJControls.RJButton Lessons;
         private CustomControls.RJControls.RJButton ButtonMaterials;
         private CustomControls.RJControls.RJButton ButtonReport;
+        private CustomControls.RJControls.RJButton ButtonVkSettings;
+        private CustomControls.RJControls.RJButton ButtonPublications;
     }
 }

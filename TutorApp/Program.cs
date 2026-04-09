@@ -51,6 +51,7 @@ namespace TutorApp
             services.AddTransient<MaterialService>();
             services.AddTransient<PublicationService>();
             services.AddTransient<ReportService>();
+            services.AddTransient<VkSettingsService>();
             services.AddTransient<FormMain>();
             services.AddTransient<FormStudents>();
             services.AddTransient<FormStudent>();
@@ -63,6 +64,8 @@ namespace TutorApp
             services.AddTransient<FormMaterials>();
             services.AddTransient<FormMaterial>();
             services.AddTransient<FormReport>();
+            services.AddTransient<FormVkSetup>();
+            services.AddTransient<FormPublications>();
             ServiceProvider = services.BuildServiceProvider();
 
             // Создаём базу данных
