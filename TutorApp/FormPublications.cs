@@ -186,26 +186,27 @@ namespace TutorApp
                 return;
             }
 
-            // 4. Сбор ссылок на картинки (если есть поле для ввода)
-            List<string> imageUrls = new List<string>();
+            // 4. Сбор путей к изображениям из текстового поля (каждый путь с новой строки или через запятую)
+            List<string> imagePaths = new List<string>();
             if (!string.IsNullOrEmpty(textBoxPictures.Text))
             {
-                // Разделители: запятая, точка с запятой, пробел, перевод строки
                 var separators = new[] { ',', ';', ' ', '\n', '\r' };
-                imageUrls = textBoxPictures.Text
+                imagePaths = textBoxPictures.Text
                     .Split(separators, StringSplitOptions.RemoveEmptyEntries)
-                    .Where(url => url.StartsWith("http://", StringComparison.OrdinalIgnoreCase) ||
-                                  url.StartsWith("https://", StringComparison.OrdinalIgnoreCase))
+                    .Where(path => File.Exists(path.Trim()))
+                    .Select(path => path.Trim())
                     .ToList();
 
-                if (imageUrls.Any())
+                if (imagePaths.Any())
                 {
-                    LogToFile($"Найдено {imageUrls.Count} ссылок на изображения");
+                    LogToFile($"Найдено {imagePaths.Count} изображений для публикации");
                 }
                 else if (!string.IsNullOrWhiteSpace(textBoxPictures.Text))
                 {
-                    MessageBox.Show("Введённые ссылки не распознаны. Убедитесь, что ссылки начинаются с http:// или https://",
-                        "Предупреждение", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    var result = MessageBox.Show("Некоторые указанные файлы не найдены. Продолжить публикацию без них?",
+                        "Предупреждение", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                    if (result == DialogResult.No)
+                        return;
                 }
             }
 
@@ -214,11 +215,11 @@ namespace TutorApp
                 Cursor = Cursors.WaitCursor;
                 ButtonPublishNow.Enabled = false;
 
-                // --- ШАГ 1: Публикация в VK (текст + ссылки на картинки) ---
+                // Публикация
                 var vkHelper = new VkPostHelper(vkSettings.AccessToken, vkSettings.GroupId);
-                long postId = await vkHelper.PublishMaterialAsync(selectedMaterial.FilePath, imageUrls);
+                long postId = await vkHelper.PublishMaterialWithImagesAsync(selectedMaterial.FilePath, imagePaths);
 
-                // --- ШАГ 2: Сохранение в БД ---
+                // Сохранение в БД
                 var newPublication = new PublicationModel
                 {
                     MaterialId = selectedMaterial.Id,
@@ -231,14 +232,16 @@ namespace TutorApp
                 // Обновляем таблицу
                 await LoadDataAsync();
 
-                // Формируем сообщение об успехе
                 string successMessage = $"✅ Пост успешно опубликован!\nID записи ВКонтакте: {postId}";
-                if (imageUrls.Any())
+                if (imagePaths.Any())
                 {
-                    successMessage += $"\n📷 Добавлено изображений: {imageUrls.Count}";
+                    successMessage += $"\n📷 Загружено изображений: {imagePaths.Count}";
                 }
 
                 MessageBox.Show(successMessage, "Успех", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                // Очищаем поле с путями после успешной публикации
+                textBoxPictures.Text = "";
             }
             catch (Exception ex)
             {
