@@ -62,7 +62,7 @@ namespace TutorApp
             {
                 Name = "TypeName",
                 DataPropertyName = "TypeName",
-                HeaderText = "Название типа занятия",
+                HeaderText = "Название направления отработки",
                 Width = 300,
                 AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
             };

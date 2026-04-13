@@ -251,9 +251,9 @@
             ButtonExportPDF.FlatStyle = FlatStyle.Flat;
             ButtonExportPDF.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 204);
             ButtonExportPDF.ForeColor = Color.Black;
-            ButtonExportPDF.Location = new Point(700, 157);
+            ButtonExportPDF.Location = new Point(681, 157);
             ButtonExportPDF.Name = "ButtonExportPDF";
-            ButtonExportPDF.Size = new Size(188, 50);
+            ButtonExportPDF.Size = new Size(207, 50);
             ButtonExportPDF.TabIndex = 18;
             ButtonExportPDF.Text = "📄 ЭКСПОРТ В PDF";
             ButtonExportPDF.TextColor = Color.Black;
