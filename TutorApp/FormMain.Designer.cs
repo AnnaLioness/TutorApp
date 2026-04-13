@@ -38,121 +38,121 @@
             // 
             // Students
             // 
-            Students.BackColor = Color.DeepSkyBlue;
-            Students.BackgroundColor = Color.DeepSkyBlue;
+            Students.BackColor = Color.White;
+            Students.BackgroundColor = Color.White;
             Students.BorderColor = Color.PaleVioletRed;
             Students.BorderRadius = 10;
             Students.BorderSize = 0;
             Students.FlatAppearance.BorderSize = 0;
             Students.FlatStyle = FlatStyle.Flat;
-            Students.Font = new Font("Segoe UI Black", 12F, FontStyle.Bold, GraphicsUnit.Point, 204);
-            Students.ForeColor = Color.Black;
-            Students.Location = new Point(304, 29);
+            Students.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 204);
+            Students.ForeColor = Color.FromArgb(70, 119, 207);
+            Students.Location = new Point(99, 69);
             Students.Name = "Students";
             Students.Size = new Size(188, 50);
             Students.TabIndex = 0;
             Students.Text = "Ученики";
-            Students.TextColor = Color.Black;
+            Students.TextColor = Color.FromArgb(70, 119, 207);
             Students.UseVisualStyleBackColor = false;
             Students.Click += Students_Click;
             // 
             // Lessons
             // 
-            Lessons.BackColor = Color.DeepSkyBlue;
-            Lessons.BackgroundColor = Color.DeepSkyBlue;
+            Lessons.BackColor = Color.White;
+            Lessons.BackgroundColor = Color.White;
             Lessons.BorderColor = Color.PaleVioletRed;
             Lessons.BorderRadius = 10;
             Lessons.BorderSize = 0;
             Lessons.FlatAppearance.BorderSize = 0;
             Lessons.FlatStyle = FlatStyle.Flat;
-            Lessons.Font = new Font("Segoe UI Black", 12F, FontStyle.Bold, GraphicsUnit.Point, 204);
-            Lessons.ForeColor = Color.Black;
-            Lessons.Location = new Point(304, 105);
+            Lessons.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 204);
+            Lessons.ForeColor = Color.FromArgb(70, 119, 207);
+            Lessons.Location = new Point(99, 145);
             Lessons.Name = "Lessons";
             Lessons.Size = new Size(188, 50);
             Lessons.TabIndex = 1;
             Lessons.Text = "Уроки";
-            Lessons.TextColor = Color.Black;
+            Lessons.TextColor = Color.FromArgb(70, 119, 207);
             Lessons.UseVisualStyleBackColor = false;
             Lessons.Click += Lessons_Click;
             // 
             // ButtonMaterials
             // 
-            ButtonMaterials.BackColor = Color.DeepSkyBlue;
-            ButtonMaterials.BackgroundColor = Color.DeepSkyBlue;
+            ButtonMaterials.BackColor = Color.White;
+            ButtonMaterials.BackgroundColor = Color.White;
             ButtonMaterials.BorderColor = Color.PaleVioletRed;
             ButtonMaterials.BorderRadius = 10;
             ButtonMaterials.BorderSize = 0;
             ButtonMaterials.FlatAppearance.BorderSize = 0;
             ButtonMaterials.FlatStyle = FlatStyle.Flat;
-            ButtonMaterials.Font = new Font("Segoe UI Black", 12F, FontStyle.Bold, GraphicsUnit.Point, 204);
-            ButtonMaterials.ForeColor = Color.Black;
-            ButtonMaterials.Location = new Point(304, 184);
+            ButtonMaterials.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 204);
+            ButtonMaterials.ForeColor = Color.FromArgb(70, 119, 207);
+            ButtonMaterials.Location = new Point(99, 224);
             ButtonMaterials.Name = "ButtonMaterials";
             ButtonMaterials.Size = new Size(188, 50);
             ButtonMaterials.TabIndex = 2;
             ButtonMaterials.Text = "Материалы";
-            ButtonMaterials.TextColor = Color.Black;
+            ButtonMaterials.TextColor = Color.FromArgb(70, 119, 207);
             ButtonMaterials.UseVisualStyleBackColor = false;
             ButtonMaterials.Click += ButtonMaterials_Click;
             // 
             // ButtonReport
             // 
-            ButtonReport.BackColor = Color.DeepSkyBlue;
-            ButtonReport.BackgroundColor = Color.DeepSkyBlue;
+            ButtonReport.BackColor = Color.White;
+            ButtonReport.BackgroundColor = Color.White;
             ButtonReport.BorderColor = Color.PaleVioletRed;
             ButtonReport.BorderRadius = 10;
             ButtonReport.BorderSize = 0;
             ButtonReport.FlatAppearance.BorderSize = 0;
             ButtonReport.FlatStyle = FlatStyle.Flat;
-            ButtonReport.Font = new Font("Segoe UI Black", 12F, FontStyle.Bold, GraphicsUnit.Point, 204);
-            ButtonReport.ForeColor = Color.Black;
-            ButtonReport.Location = new Point(290, 261);
+            ButtonReport.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 204);
+            ButtonReport.ForeColor = Color.FromArgb(70, 119, 207);
+            ButtonReport.Location = new Point(85, 301);
             ButtonReport.Name = "ButtonReport";
             ButtonReport.Size = new Size(219, 50);
             ButtonReport.TabIndex = 3;
             ButtonReport.Text = "Отчёт и статистика";
-            ButtonReport.TextColor = Color.Black;
+            ButtonReport.TextColor = Color.FromArgb(70, 119, 207);
             ButtonReport.UseVisualStyleBackColor = false;
             ButtonReport.Click += ButtonReport_Click;
             // 
             // ButtonVkSettings
             // 
-            ButtonVkSettings.BackColor = Color.DeepSkyBlue;
-            ButtonVkSettings.BackgroundColor = Color.DeepSkyBlue;
-            ButtonVkSettings.BorderColor = Color.PaleVioletRed;
+            ButtonVkSettings.BackColor = Color.FromArgb(130, 179, 255);
+            ButtonVkSettings.BackgroundColor = Color.FromArgb(130, 179, 255);
+            ButtonVkSettings.BorderColor = Color.White;
             ButtonVkSettings.BorderRadius = 10;
-            ButtonVkSettings.BorderSize = 0;
+            ButtonVkSettings.BorderSize = 1;
             ButtonVkSettings.FlatAppearance.BorderSize = 0;
             ButtonVkSettings.FlatStyle = FlatStyle.Flat;
-            ButtonVkSettings.Font = new Font("Segoe UI Black", 12F, FontStyle.Bold, GraphicsUnit.Point, 204);
-            ButtonVkSettings.ForeColor = Color.Black;
-            ButtonVkSettings.Location = new Point(269, 407);
+            ButtonVkSettings.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 204);
+            ButtonVkSettings.ForeColor = Color.White;
+            ButtonVkSettings.Location = new Point(64, 447);
             ButtonVkSettings.Name = "ButtonVkSettings";
             ButtonVkSettings.Size = new Size(272, 50);
             ButtonVkSettings.TabIndex = 4;
             ButtonVkSettings.Text = "Настройка работы с Vk";
-            ButtonVkSettings.TextColor = Color.Black;
+            ButtonVkSettings.TextColor = Color.White;
             ButtonVkSettings.UseVisualStyleBackColor = false;
             ButtonVkSettings.Click += ButtonVkSettings_Click;
             // 
             // ButtonPublications
             // 
-            ButtonPublications.BackColor = Color.DeepSkyBlue;
-            ButtonPublications.BackgroundColor = Color.DeepSkyBlue;
+            ButtonPublications.BackColor = Color.White;
+            ButtonPublications.BackgroundColor = Color.White;
             ButtonPublications.BorderColor = Color.PaleVioletRed;
             ButtonPublications.BorderRadius = 10;
             ButtonPublications.BorderSize = 0;
             ButtonPublications.FlatAppearance.BorderSize = 0;
             ButtonPublications.FlatStyle = FlatStyle.Flat;
-            ButtonPublications.Font = new Font("Segoe UI Black", 12F, FontStyle.Bold, GraphicsUnit.Point, 204);
-            ButtonPublications.ForeColor = Color.Black;
-            ButtonPublications.Location = new Point(290, 334);
+            ButtonPublications.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 204);
+            ButtonPublications.ForeColor = Color.FromArgb(70, 119, 207);
+            ButtonPublications.Location = new Point(85, 374);
             ButtonPublications.Name = "ButtonPublications";
             ButtonPublications.Size = new Size(219, 50);
             ButtonPublications.TabIndex = 5;
             ButtonPublications.Text = "Публикации Vk";
-            ButtonPublications.TextColor = Color.Black;
+            ButtonPublications.TextColor = Color.FromArgb(70, 119, 207);
             ButtonPublications.UseVisualStyleBackColor = false;
             ButtonPublications.Click += ButtonPublications_Click;
             // 
@@ -160,7 +160,8 @@
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 507);
+            ClientSize = new Size(400, 527);
+            BackColor = Color.FromArgb(130, 179, 255);
             Controls.Add(ButtonPublications);
             Controls.Add(ButtonVkSettings);
             Controls.Add(ButtonReport);
@@ -168,6 +169,7 @@
             Controls.Add(Lessons);
             Controls.Add(Students);
             Name = "FormMain";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "Главная";
             ResumeLayout(false);
         }

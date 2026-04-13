@@ -44,7 +44,8 @@
             // 
             // textBoxName
             // 
-            textBoxName.Location = new Point(81, 78);
+            textBoxName.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point, 204);
+            textBoxName.Location = new Point(82, 131);
             textBoxName.Name = "textBoxName";
             textBoxName.Size = new Size(520, 27);
             textBoxName.TabIndex = 0;
@@ -52,17 +53,19 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 204);
-            label1.Location = new Point(10, 77);
+            label1.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold);
+            label1.ForeColor = Color.White;
+            label1.Location = new Point(11, 130);
             label1.Name = "label1";
-            label1.Size = new Size(65, 28);
+            label1.Size = new Size(63, 28);
             label1.TabIndex = 1;
             label1.Text = "ФИО:";
             // 
             // numericUpDownAge
             // 
             numericUpDownAge.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point, 204);
-            numericUpDownAge.Location = new Point(110, 137);
+            numericUpDownAge.ForeColor = Color.Black;
+            numericUpDownAge.Location = new Point(111, 190);
             numericUpDownAge.Name = "numericUpDownAge";
             numericUpDownAge.Size = new Size(150, 27);
             numericUpDownAge.TabIndex = 2;
@@ -70,16 +73,18 @@
             // label2
             // 
             label2.AutoSize = true;
-            label2.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 204);
-            label2.Location = new Point(10, 136);
+            label2.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold);
+            label2.ForeColor = Color.White;
+            label2.Location = new Point(11, 189);
             label2.Name = "label2";
-            label2.Size = new Size(94, 28);
+            label2.Size = new Size(90, 28);
             label2.TabIndex = 3;
             label2.Text = "Возраст:";
             // 
             // textBoxPhone
             // 
-            textBoxPhone.Location = new Point(199, 196);
+            textBoxPhone.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point, 204);
+            textBoxPhone.Location = new Point(200, 249);
             textBoxPhone.Name = "textBoxPhone";
             textBoxPhone.Size = new Size(125, 27);
             textBoxPhone.TabIndex = 4;
@@ -87,17 +92,20 @@
             // label3
             // 
             label3.AutoSize = true;
-            label3.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 204);
-            label3.Location = new Point(10, 195);
+            label3.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold);
+            label3.ForeColor = Color.White;
+            label3.Location = new Point(11, 248);
             label3.Name = "label3";
-            label3.Size = new Size(183, 28);
+            label3.Size = new Size(179, 28);
             label3.TabIndex = 5;
             label3.Text = "Номер телефона:";
             // 
             // comboBox1
             // 
+            comboBox1.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point, 204);
+            comboBox1.ForeColor = Color.Black;
             comboBox1.FormattingEnabled = true;
-            comboBox1.Location = new Point(114, 250);
+            comboBox1.Location = new Point(115, 303);
             comboBox1.Name = "comboBox1";
             comboBox1.Size = new Size(151, 28);
             comboBox1.TabIndex = 6;
@@ -105,60 +113,62 @@
             // label4
             // 
             label4.AutoSize = true;
-            label4.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 204);
-            label4.Location = new Point(10, 250);
+            label4.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold);
+            label4.ForeColor = Color.White;
+            label4.Location = new Point(11, 303);
             label4.Name = "label4";
-            label4.Size = new Size(98, 28);
+            label4.Size = new Size(97, 28);
             label4.TabIndex = 7;
             label4.Text = "Уровень:";
             // 
             // rjButton1
             // 
-            rjButton1.BackColor = Color.DeepSkyBlue;
-            rjButton1.BackgroundColor = Color.DeepSkyBlue;
+            rjButton1.BackColor = Color.White;
+            rjButton1.BackgroundColor = Color.White;
             rjButton1.BorderColor = Color.PaleVioletRed;
             rjButton1.BorderRadius = 10;
             rjButton1.BorderSize = 0;
             rjButton1.FlatAppearance.BorderSize = 0;
             rjButton1.FlatStyle = FlatStyle.Flat;
-            rjButton1.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 204);
-            rjButton1.ForeColor = Color.Black;
-            rjButton1.Location = new Point(10, 305);
+            rjButton1.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 204);
+            rjButton1.ForeColor = Color.CornflowerBlue;
+            rjButton1.Location = new Point(11, 358);
             rjButton1.Name = "rjButton1";
             rjButton1.Size = new Size(188, 50);
             rjButton1.TabIndex = 8;
             rjButton1.Text = "Сохранить";
-            rjButton1.TextColor = Color.Black;
+            rjButton1.TextColor = Color.CornflowerBlue;
             rjButton1.UseVisualStyleBackColor = false;
             rjButton1.Click += rjButton1_Click;
             // 
             // ButtonAddLevel
             // 
-            ButtonAddLevel.BackColor = Color.DeepSkyBlue;
-            ButtonAddLevel.BackgroundColor = Color.DeepSkyBlue;
+            ButtonAddLevel.BackColor = Color.White;
+            ButtonAddLevel.BackgroundColor = Color.White;
             ButtonAddLevel.BorderColor = Color.PaleVioletRed;
             ButtonAddLevel.BorderRadius = 10;
             ButtonAddLevel.BorderSize = 0;
             ButtonAddLevel.FlatAppearance.BorderSize = 0;
             ButtonAddLevel.FlatStyle = FlatStyle.Flat;
             ButtonAddLevel.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point, 204);
-            ButtonAddLevel.ForeColor = Color.Black;
-            ButtonAddLevel.Location = new Point(408, 305);
+            ButtonAddLevel.ForeColor = Color.CornflowerBlue;
+            ButtonAddLevel.Location = new Point(409, 358);
             ButtonAddLevel.Name = "ButtonAddLevel";
             ButtonAddLevel.Size = new Size(278, 50);
             ButtonAddLevel.TabIndex = 9;
             ButtonAddLevel.Text = "Добавить новый уровень ученика";
-            ButtonAddLevel.TextColor = Color.Black;
+            ButtonAddLevel.TextColor = Color.CornflowerBlue;
             ButtonAddLevel.UseVisualStyleBackColor = false;
             ButtonAddLevel.Click += ButtonAddLevel_Click;
             // 
             // label7
             // 
             label7.AutoSize = true;
-            label7.Font = new Font("Segoe UI Black", 24F, FontStyle.Bold, GraphicsUnit.Point, 204);
-            label7.Location = new Point(101, 9);
+            label7.Font = new Font("Segoe UI Semibold", 24F, FontStyle.Bold, GraphicsUnit.Point, 204);
+            label7.ForeColor = Color.White;
+            label7.Location = new Point(102, 62);
             label7.Name = "label7";
-            label7.Size = new Size(538, 54);
+            label7.Size = new Size(498, 54);
             label7.TabIndex = 28;
             label7.Text = "Информация об ученике";
             // 
@@ -166,7 +176,8 @@
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(716, 371);
+            BackColor = Color.FromArgb(130, 179, 255);
+            ClientSize = new Size(705, 424);
             Controls.Add(label7);
             Controls.Add(ButtonAddLevel);
             Controls.Add(rjButton1);
