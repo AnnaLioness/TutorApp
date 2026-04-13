@@ -131,13 +131,13 @@
             rjButton1.FlatAppearance.BorderSize = 0;
             rjButton1.FlatStyle = FlatStyle.Flat;
             rjButton1.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 204);
-            rjButton1.ForeColor = Color.CornflowerBlue;
+            rjButton1.ForeColor = Color.FromArgb(70, 119, 207);
             rjButton1.Location = new Point(11, 358);
             rjButton1.Name = "rjButton1";
             rjButton1.Size = new Size(188, 50);
             rjButton1.TabIndex = 8;
             rjButton1.Text = "Сохранить";
-            rjButton1.TextColor = Color.CornflowerBlue;
+            rjButton1.TextColor = Color.FromArgb(70, 119, 207);
             rjButton1.UseVisualStyleBackColor = false;
             rjButton1.Click += rjButton1_Click;
             // 
@@ -151,13 +151,13 @@
             ButtonAddLevel.FlatAppearance.BorderSize = 0;
             ButtonAddLevel.FlatStyle = FlatStyle.Flat;
             ButtonAddLevel.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point, 204);
-            ButtonAddLevel.ForeColor = Color.CornflowerBlue;
+            ButtonAddLevel.ForeColor = Color.FromArgb(70, 119, 207);
             ButtonAddLevel.Location = new Point(409, 358);
             ButtonAddLevel.Name = "ButtonAddLevel";
             ButtonAddLevel.Size = new Size(278, 50);
             ButtonAddLevel.TabIndex = 9;
             ButtonAddLevel.Text = "Добавить новый уровень ученика";
-            ButtonAddLevel.TextColor = Color.CornflowerBlue;
+            ButtonAddLevel.TextColor = Color.FromArgb(70, 119, 207);
             ButtonAddLevel.UseVisualStyleBackColor = false;
             ButtonAddLevel.Click += ButtonAddLevel_Click;
             // 

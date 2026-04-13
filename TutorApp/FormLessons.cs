@@ -42,6 +42,58 @@ namespace TutorApp
             DictionaryService dictionaryService)
         {
             InitializeComponent();
+
+            this.FormBorderStyle = FormBorderStyle.None;
+
+            // Создаем свою панель-шапку
+            Panel titleBar = new Panel();
+            titleBar.Height = 40;
+            titleBar.Dock = DockStyle.Top;
+            titleBar.BackColor = Color.RoyalBlue; // Ваш цвет
+
+            // Добавляем кнопку закрытия
+            Button closeBtn = new Button();
+            closeBtn.Text = "X";
+            closeBtn.FlatStyle = FlatStyle.Flat;
+            closeBtn.BackColor = Color.Transparent;
+            closeBtn.ForeColor = Color.White;
+            closeBtn.Size = new Size(40, 40);
+            closeBtn.Dock = DockStyle.Right;
+            closeBtn.Click += (s, e) => this.Close();
+
+            // Добавляем заголовок
+            Label titleLabel = new Label();
+            titleLabel.Text = this.Text;
+            titleLabel.ForeColor = Color.White;
+            titleLabel.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold);
+            titleLabel.Location = new Point(10, 10);
+            titleLabel.AutoSize = true;
+
+            // Добавляем возможность перетаскивать окно
+            bool dragging = false;
+            Point startPoint = Point.Empty;
+
+            titleBar.MouseDown += (s, e) =>
+            {
+                dragging = true;
+                startPoint = new Point(e.X, e.Y);
+            };
+
+            titleBar.MouseMove += (s, e) =>
+            {
+                if (dragging)
+                {
+                    Point p = PointToScreen(e.Location);
+                    this.Location = new Point(p.X - startPoint.X, p.Y - startPoint.Y);
+                }
+            };
+
+            titleBar.MouseUp += (s, e) => dragging = false;
+
+            titleBar.Controls.Add(closeBtn);
+            titleBar.Controls.Add(titleLabel);
+            this.Controls.Add(titleBar);
+
             _lessonService = lessonService;
             _studentService = studentService;
             _dictionaryService = dictionaryService;
@@ -195,7 +247,7 @@ namespace TutorApp
         {
             try
             {
-               
+
                 dataGridView.Rows.Clear();
 
                 foreach (var lesson in _lessons.OrderByDescending(l => l.Date).ThenByDescending(l => l.Time))
@@ -223,7 +275,7 @@ namespace TutorApp
                     };
 
                     int rowIndex = dataGridView.Rows.Add(
-                    
+
                         lesson.Id,
                         lesson.Date.ToString("dd.MM.yyyy"),
                         dayOfWeek,
@@ -236,10 +288,10 @@ namespace TutorApp
                         lesson.Comment ?? "",
                        "✅ Провести",
                        "❌ Отменить",
-                       "🗑️ Удалить" 
+                       "🗑️ Удалить"
                     );
                     // Добавляем кнопки ТОЛЬКО если урок запланирован
-                    
+
 
                     // Цвет фона для статуса
                     if (lesson.Status == LessonStatus.Проведён)
@@ -258,7 +310,7 @@ namespace TutorApp
                 MessageBox.Show($"Ошибка при отображении данных: {ex.Message}",
                     "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            
+
         }
         private async void DataGridView_CellClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -330,7 +382,7 @@ namespace TutorApp
                     _lessons = (List<LessonModel>)await _lessonService.GetAllLessons();
                     // Обновляем отображение
                     DisplayLessons();
-                    
+
 
                     MessageBox.Show("Урок успешно проведён", "Успех",
                         MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -354,7 +406,7 @@ namespace TutorApp
 
         private async Task CancelLesson(LessonModel lesson)
         {
-           
+
 
             var result = MessageBox.Show($"Отменить урок?", "Подтверждение",
                 MessageBoxButtons.YesNo, MessageBoxIcon.Question);
@@ -374,12 +426,12 @@ namespace TutorApp
 
                 if (success)
                 {
-                    
-                    _lessons = (List <LessonModel>)await _lessonService.GetAllLessons();
+
+                    _lessons = (List<LessonModel>)await _lessonService.GetAllLessons();
 
                     // Обновляем отображение
                     DisplayLessons();
-                   
+
 
                     MessageBox.Show("Ученик успешно отменён", "Успех",
                         MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -511,6 +563,20 @@ namespace TutorApp
         private void ButtonRef_Click(object sender, EventArgs e)
         {
             LoadDataAsync();
+        }
+
+        protected override void OnPaint(PaintEventArgs e)
+        {
+            base.OnPaint(e);
+
+            // Рисуем рамку вокруг формы
+            if (this.FormBorderStyle == FormBorderStyle.None)
+            {
+                using (Pen pen = new Pen(Color.RoyalBlue, 5))
+                {
+                    e.Graphics.DrawRectangle(pen, 0, 0, this.Width - 1, this.Height - 1);
+                }
+            }
         }
     }
 }
