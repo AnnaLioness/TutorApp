@@ -51,21 +51,21 @@
             // 
             // ButtonAddType
             // 
-            ButtonAddType.BackColor = Color.White;
-            ButtonAddType.BackgroundColor = Color.White;
-            ButtonAddType.BorderColor = Color.PaleVioletRed;
+            ButtonAddType.BackColor = Color.FromArgb(130, 179, 255);
+            ButtonAddType.BackgroundColor = Color.FromArgb(130, 179, 255);
+            ButtonAddType.BorderColor = Color.White;
             ButtonAddType.BorderRadius = 10;
-            ButtonAddType.BorderSize = 0;
+            ButtonAddType.BorderSize = 1;
             ButtonAddType.FlatAppearance.BorderSize = 0;
             ButtonAddType.FlatStyle = FlatStyle.Flat;
             ButtonAddType.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point, 204);
-            ButtonAddType.ForeColor = Color.FromArgb(70, 119, 207);
+            ButtonAddType.ForeColor = Color.White;
             ButtonAddType.Location = new Point(323, 452);
             ButtonAddType.Name = "ButtonAddType";
             ButtonAddType.Size = new Size(316, 50);
             ButtonAddType.TabIndex = 12;
             ButtonAddType.Text = "Добавить новое направление отработки";
-            ButtonAddType.TextColor = Color.FromArgb(70, 119, 207);
+            ButtonAddType.TextColor = Color.White;
             ButtonAddType.UseVisualStyleBackColor = false;
             ButtonAddType.Click += ButtonAddType_Click;
             // 
