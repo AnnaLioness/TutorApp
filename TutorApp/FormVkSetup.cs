@@ -198,7 +198,7 @@ namespace TutorApp
         private void ButtonInstruction_Click(object sender, EventArgs e)
         {
             // Ссылка на инструкцию (можно заменить на свою)
-            string instructionUrl = "https://telegra.ph/Kak-poluchit-ID-gruppy-i-servisnyj-token-VK-dlya-TutorApp-04-05";
+            string instructionUrl = "https://disk.yandex.ru/i/cY-xnQ0IGpK4WA";
 
             try
             {
