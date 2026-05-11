@@ -210,5 +210,67 @@ namespace TutorApp.helpers
             }
             catch { }
         }
+        /// <summary>
+        /// Отложенная публикация поста (по расписанию)
+        /// </summary>
+        public async Task<long> SchedulePostAsync(string filePath, DateTime scheduledDate, List<string> imagePaths = null)
+        {
+            LogToFile("=== НАЧАЛО ОТЛОЖЕННОЙ ПУБЛИКАЦИИ ===");
+            LogToFile($"Запланированная дата: {scheduledDate:yyyy-MM-dd HH:mm:ss}");
+
+            string postContent = ExtractTextFromWord(filePath);
+            LogToFile($"Текст из Word: {(postContent?.Length ?? 0)} символов");
+
+            var attachments = new List<MediaAttachment>();
+
+            if (imagePaths != null && imagePaths.Any())
+            {
+                LogToFile($"Найдено {imagePaths.Count} изображений для загрузки");
+
+                foreach (var imagePath in imagePaths)
+                {
+                    if (!File.Exists(imagePath))
+                    {
+                        LogToFile($"Файл не найден: {imagePath}");
+                        continue;
+                    }
+
+                    string photoId = await UploadPhotoToAlbum(imagePath);
+                    if (!string.IsNullOrEmpty(photoId))
+                    {
+                        var parts = photoId.Replace("photo", "").Split('_');
+                        if (parts.Length == 2)
+                        {
+                            var photo = new Photo
+                            {
+                                OwnerId = long.Parse(parts[0]),
+                                Id = long.Parse(parts[1])
+                            };
+                            attachments.Add(photo);
+                            LogToFile($"Изображение прикреплено: {Path.GetFileName(imagePath)}");
+                        }
+                    }
+                }
+            }
+
+            long publishDateUnix = ((DateTimeOffset)scheduledDate).ToUnixTimeSeconds();
+
+            var wallPostParams = new WallPostParams
+            {
+                OwnerId = _groupId,
+                FromGroup = true,
+                Message = postContent,
+                Attachments = attachments,
+                PublishDate = scheduledDate
+            };
+
+            LogToFile($"Параметры поста: OwnerId={_groupId}, FromGroup=true, MessageLength={postContent?.Length ?? 0}, AttachmentsCount={attachments.Count}, PublishDate={publishDateUnix}");
+
+            var postId = await _vkApi.Wall.PostAsync(wallPostParams);
+            LogToFile($"Отложенный пост создан! ID: {postId}");
+            LogToFile("=== КОНЕЦ ОТЛОЖЕННОЙ ПУБЛИКАЦИИ ===");
+
+            return postId;
+        }
     }
 }

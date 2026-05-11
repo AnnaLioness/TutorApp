@@ -1,4 +1,5 @@
 ﻿using Models.Models;
+using Repositories.Implementations;
 using Services.Services;
 using System;
 using System.Collections.Generic;
@@ -20,11 +21,16 @@ namespace TutorApp
         private readonly VkSettingsService _vkSettingsService;
         private List<PublicationModel> _publications;
         private List<MaterialModel> _materials;
+        private System.Windows.Forms.Timer _statusTimer;
         public FormPublications(PublicationService publicationService,
             MaterialService materialService,
             VkSettingsService vkSettingsService)
         {
             InitializeComponent();
+            _statusTimer = new System.Windows.Forms.Timer();
+            _statusTimer.Interval = 60000; // 60 секунд
+            _statusTimer.Tick += async (s, e) => await UpdatePendingPublicationsStatus();
+            _statusTimer.Start();
 
             this.FormBorderStyle = FormBorderStyle.None;
 
@@ -119,7 +125,7 @@ namespace TutorApp
                 HeaderText = "Дата публикации",
                 DataPropertyName = "PublicationDate",
                 DefaultCellStyle = new DataGridViewCellStyle { Format = "dd.MM.yyyy HH:mm" },
-       
+
             };
             DataGridViewPublications.Columns.Add(dateColumn);
 
@@ -129,7 +135,7 @@ namespace TutorApp
                 Name = "MaterialTitle",
                 HeaderText = "Материал",
                 DataPropertyName = "MaterialTitle",
-             
+
             };
             DataGridViewPublications.Columns.Add(materialColumn);
 
@@ -139,7 +145,7 @@ namespace TutorApp
                 Name = "Status",
                 HeaderText = "Статус",
                 DataPropertyName = "Status",
-            
+
             };
             DataGridViewPublications.Columns.Add(statusColumn);
 
@@ -332,6 +338,144 @@ namespace TutorApp
                 File.AppendAllText(logPath, $"{DateTime.Now:yyyy-MM-dd HH:mm:ss.fff} - {message}{Environment.NewLine}");
             }
             catch { }
+        }
+
+        private async void ButtonAuto_Click(object sender, EventArgs e)
+        {
+            // 1. Проверка: выбран ли материал
+            if (cmbMaterial.SelectedItem == null)
+            {
+                MessageBox.Show("Выберите материал для планирования публикации.", "Внимание",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            var selectedMaterial = (MaterialModel)cmbMaterial.SelectedItem;
+
+            // 2. Проверка: настроен ли доступ к VK
+            var vkSettings = _vkSettingsService.Load();
+            if (!vkSettings.IsConfigured)
+            {
+                MessageBox.Show("Сначала настройте доступ к ВКонтакте в меню Настройки → VK.",
+                    "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            // 3. Проверка: существует ли файл материала на диске
+            if (string.IsNullOrEmpty(selectedMaterial.FilePath) || !File.Exists(selectedMaterial.FilePath))
+            {
+                MessageBox.Show("Файл материала не найден по указанному пути.", "Ошибка",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            // 4. Сбор путей к изображениям из текстового поля
+            List<string> imagePaths = new List<string>();
+            if (!string.IsNullOrEmpty(textBoxPictures.Text))
+            {
+                var separators = new[] { ',', ';', ' ', '\n', '\r' };
+                imagePaths = textBoxPictures.Text
+                    .Split(separators, StringSplitOptions.RemoveEmptyEntries)
+                    .Where(path => File.Exists(path.Trim()))
+                    .Select(path => path.Trim())
+                    .ToList();
+
+                if (imagePaths.Any())
+                {
+                    LogToFile($"Найдено {imagePaths.Count} изображений для публикации");
+                }
+                else if (!string.IsNullOrWhiteSpace(textBoxPictures.Text))
+                {
+                    var result = MessageBox.Show("Некоторые указанные файлы не найдены. Продолжить планирование публикации без них?",
+                        "Предупреждение", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                    if (result == DialogResult.No)
+                        return;
+                }
+            }
+
+            try
+            {
+                Cursor = Cursors.WaitCursor;
+                ButtonAuto.Enabled = false;
+                ButtonPublishNow.Enabled = false;
+
+                // 5. Рассчитываем дату публикации по алгоритму
+                var scheduler = new PublicationScheduleHelper();
+                DateTime scheduledDate = scheduler.CalculateSchedule(selectedMaterial);
+
+                // 6. Отложенная публикация в VK
+                var vkHelper = new VkPostHelper(vkSettings.AccessToken, vkSettings.GroupId);
+                long postId = await vkHelper.SchedulePostAsync(selectedMaterial.FilePath, scheduledDate, imagePaths);
+
+                // 7. Сохранение в БД
+                var newPublication = new PublicationModel
+                {
+                    MaterialId = selectedMaterial.Id,
+                    PublicationDate = scheduledDate,
+                    IsPublicted = false  // Отложенная публикация
+                };
+
+                await _publicationService.AddPublication(newPublication);
+
+                // 8. Обновляем таблицу
+                await LoadDataAsync();
+
+                string successMessage = $"📅 Отложенный пост запланирован!\n\n" +
+                                        $"📝 Материал: {selectedMaterial.Title}\n" +
+                                        $"🕒 Дата публикации: {scheduledDate:dd.MM.yyyy HH:mm}\n" +
+                                        $"🆔 ID записи ВКонтакте: {postId}";
+
+                if (imagePaths.Any())
+                {
+                    successMessage += $"\n📷 Загружено изображений: {imagePaths.Count}";
+                }
+
+                MessageBox.Show(successMessage, "Успех", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                // Очищаем поле с путями после успешной операции
+                textBoxPictures.Text = "";
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Ошибка при планировании публикации: {ex.Message}", "Ошибка",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                Cursor = Cursors.Default;
+                ButtonAuto.Enabled = true;
+                ButtonPublishNow.Enabled = true;
+            }
+        }
+        private async Task UpdatePendingPublicationsStatus()
+        {
+            try
+            {
+                var allPublications = await _publicationService.GetAllPublications();
+                var pendingPublications = allPublications.Where(p => !p.IsPublicted && p.PublicationDate <= DateTime.Now);
+
+                foreach (var publication in pendingPublications)
+                {
+                    // Отмечаем как опубликованное
+                    publication.IsPublicted = true;
+                    await _publicationService.UpdatePublication(publication);
+                    LogToFile($"Обновлён статус публикации ID={publication.Id}, материал={publication.Material?.Title}");
+                }
+
+                if (pendingPublications.Any())
+                {
+                    await LoadDataAsync(); // Обновляем отображение
+                }
+            }
+            catch (Exception ex)
+            {
+                LogToFile($"Ошибка при обновлении статусов: {ex.Message}");
+            }
+        }
+
+        private async void FormPublications_Load(object sender, EventArgs e)
+        {
+            await UpdatePendingPublicationsStatus();
         }
     }
 }

@@ -41,6 +41,7 @@ namespace TutorApp
             textBoxPictures = new TextBox();
             label1 = new Label();
             label2 = new Label();
+            ButtonAuto = new CustomControls.RJControls.RJButton();
             ((System.ComponentModel.ISupportInitialize)DataGridViewPublications).BeginInit();
             SuspendLayout();
             // 
@@ -62,7 +63,7 @@ namespace TutorApp
             cmbMaterial.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 204);
             cmbMaterial.Location = new Point(192, 520);
             cmbMaterial.Name = "cmbMaterial";
-            cmbMaterial.Size = new Size(300, 31);
+            cmbMaterial.Size = new Size(417, 31);
             cmbMaterial.TabIndex = 2;
             // 
             // DataGridViewPublications
@@ -108,7 +109,7 @@ namespace TutorApp
             DataGridViewPublications.RowsFont = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point, 204);
             DataGridViewPublications.RowsForeColor = Color.FromArgb(70, 119, 207);
             DataGridViewPublications.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            DataGridViewPublications.Size = new Size(600, 301);
+            DataGridViewPublications.Size = new Size(676, 301);
             DataGridViewPublications.TabIndex = 6;
             // 
             // ButtonPublishNow
@@ -142,7 +143,7 @@ namespace TutorApp
             ButtonRef.FlatStyle = FlatStyle.Flat;
             ButtonRef.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 204);
             ButtonRef.ForeColor = Color.White;
-            ButtonRef.Location = new Point(539, 573);
+            ButtonRef.Location = new Point(615, 573);
             ButtonRef.Name = "ButtonRef";
             ButtonRef.Size = new Size(73, 45);
             ButtonRef.TabIndex = 13;
@@ -157,7 +158,7 @@ namespace TutorApp
             textBoxPictures.Location = new Point(12, 474);
             textBoxPictures.Multiline = true;
             textBoxPictures.Name = "textBoxPictures";
-            textBoxPictures.Size = new Size(600, 34);
+            textBoxPictures.Size = new Size(676, 34);
             textBoxPictures.TabIndex = 14;
             // 
             // label1
@@ -182,12 +183,33 @@ namespace TutorApp
             label2.TabIndex = 16;
             label2.Text = "Публикации";
             // 
+            // ButtonAuto
+            // 
+            ButtonAuto.BackColor = Color.White;
+            ButtonAuto.BackgroundColor = Color.White;
+            ButtonAuto.BorderColor = Color.PaleVioletRed;
+            ButtonAuto.BorderRadius = 10;
+            ButtonAuto.BorderSize = 0;
+            ButtonAuto.FlatAppearance.BorderSize = 0;
+            ButtonAuto.FlatStyle = FlatStyle.Flat;
+            ButtonAuto.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 204);
+            ButtonAuto.ForeColor = Color.FromArgb(70, 119, 207);
+            ButtonAuto.Location = new Point(297, 573);
+            ButtonAuto.Name = "ButtonAuto";
+            ButtonAuto.Size = new Size(312, 45);
+            ButtonAuto.TabIndex = 17;
+            ButtonAuto.Text = "📅 Отложенная публикация";
+            ButtonAuto.TextColor = Color.FromArgb(70, 119, 207);
+            ButtonAuto.UseVisualStyleBackColor = false;
+            ButtonAuto.Click += ButtonAuto_Click;
+            // 
             // FormPublications
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(130, 179, 255);
-            ClientSize = new Size(624, 628);
+            ClientSize = new Size(700, 628);
+            Controls.Add(ButtonAuto);
             Controls.Add(label2);
             Controls.Add(label1);
             Controls.Add(textBoxPictures);
@@ -199,6 +221,7 @@ namespace TutorApp
             Name = "FormPublications";
             StartPosition = FormStartPosition.CenterParent;
             Text = "Управление публикациями";
+            Load += FormPublications_Load;
             ((System.ComponentModel.ISupportInitialize)DataGridViewPublications).EndInit();
             ResumeLayout(false);
             PerformLayout();
@@ -215,5 +238,6 @@ namespace TutorApp
         private TextBox textBoxPictures;
         private Label label1;
         private Label label2;
+        private CustomControls.RJControls.RJButton ButtonAuto;
     }
 }

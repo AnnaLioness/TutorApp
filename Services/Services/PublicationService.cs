@@ -75,5 +75,10 @@ namespace Services.Services
             await _publicationRepository.SaveAsync();
             return publication;
         }
+        public async Task UpdatePublication(PublicationModel publication)
+        {
+            await _publicationRepository.UpdateAsync(publication);
+            await _publicationRepository.SaveAsync();
+        }
     }
 }
