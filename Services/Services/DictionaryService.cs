@@ -30,10 +30,6 @@ namespace Services.Services
             return await _levelRepository.GetAllAsync();
         }
 
-        public async Task<LevelModel?> GetLevelById(int id)
-        {
-            return await _levelRepository.GetByIdAsync(id);
-        }
 
         public async Task<(bool success, string message, LevelModel? level)> CreateLevel(string levelName)
         {
@@ -105,11 +101,6 @@ namespace Services.Services
             return await _subjectRepository.GetAllAsync();
         }
 
-        public async Task<SubjectModel?> GetSubjectById(int id)
-        {
-            return await _subjectRepository.GetByIdAsync(id);
-        }
-
         public async Task<(bool success, string message, SubjectModel? subject)> CreateSubject(string subjectName)
         {
             if (string.IsNullOrWhiteSpace(subjectName))
@@ -172,10 +163,6 @@ namespace Services.Services
             return await _typeRepository.GetAllAsync();
         }
 
-        public async Task<TypeModel?> GetTypeById(int id)
-        {
-            return await _typeRepository.GetByIdAsync(id);
-        }
 
         public async Task<IEnumerable<TypeModel>> GetTypesBySubject(int subjectId)
         {

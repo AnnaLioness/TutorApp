@@ -199,53 +199,7 @@ namespace Services.Services
         /// <summary>
         /// Получить уроки на дату
         /// </summary>
-        public async Task<IEnumerable<LessonModel>> GetLessonsByDate(DateOnly date)
-        {
-            return await _lessonRepository.GetByDate(date);
-        }
 
-        /// <summary>
-        /// Получить уроки студента
-        /// </summary>
-        /*public async Task<IEnumerable<LessonModel>> GetStudentLessons(int studentId)
-        {
-            return await _lessonRepository.GetByStudent(studentId);
-        }
-
-        /// <summary>
-        /// Получить предстоящие уроки
-        /// </summary>
-        public async Task<IEnumerable<LessonModel>> GetUpcomingLessons()
-        {
-            return await _lessonRepository.GetUpcoming();
-        }*/
-
-        /// <summary>
-        /// Получить статистику уроков за период
-        /// </summary>
-        /*public async Task<object> GetLessonStatistics(DateOnly startDate, DateOnly endDate)
-        {
-            var lessons = await _lessonRepository.GetByDateRange(startDate, endDate);
-            var lessonsList = lessons.ToList();
-
-            return new
-            {
-                TotalLessons = lessonsList.Count,
-                TotalIncome = lessonsList.Sum(l => l.Price),
-                ScheduledCount = lessonsList.Count(l => l.Status == LessonStatus.Запланирован),
-                CompletedCount = lessonsList.Count(l => l.Status == LessonStatus.Проведён),
-                CancelledCount = lessonsList.Count(l => l.Status == LessonStatus.Отменён),
-                AveragePrice = lessonsList.Any() ? lessonsList.Average(l => l.Price) : 0
-            };
-        }*/
-
-        /// <summary>
-        /// Получить свободные временные слоты
-        /// </summary>
-        public async Task<List<TimeOnly>> GetAvailableTimeSlots(DateOnly date)
-        {
-            return await _lessonRepository.GetAvailableTimeSlots(date);
-        }
         public async Task<(bool success, string message)> DeleteLesson(int lessonId)
         {
             var lesson = await _lessonRepository.GetByIdAsync(lessonId);

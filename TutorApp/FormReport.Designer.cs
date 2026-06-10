@@ -49,7 +49,7 @@
             lblProfitCurrent.Name = "lblProfitCurrent";
             lblProfitCurrent.Size = new Size(510, 35);
             lblProfitCurrent.TabIndex = 4;
-            lblProfitCurrent.Text = "💰 Прибыль за период: —";
+            lblProfitCurrent.Text = "💰 Сумма за период: —";
             // 
             // lblProfitChange
             // 
@@ -120,9 +120,9 @@
             lblChart.ForeColor = Color.White;
             lblChart.Location = new Point(443, 451);
             lblChart.Name = "lblChart";
-            lblChart.Size = new Size(227, 23);
+            lblChart.Size = new Size(209, 23);
             lblChart.TabIndex = 12;
-            lblChart.Text = "📈 ДИНАМИКА ПРИБЫЛИ";
+            lblChart.Text = "📈 ДИНАМИКА СУММЫ";
             // 
             // listTopTypes
             // 
@@ -246,9 +246,9 @@
             lblTitle.ForeColor = Color.White;
             lblTitle.Location = new Point(273, 72);
             lblTitle.Name = "lblTitle";
-            lblTitle.Size = new Size(370, 41);
+            lblTitle.Size = new Size(329, 41);
             lblTitle.TabIndex = 0;
-            lblTitle.Text = "📊 ОТЧЁТ ПО ПРИБЫЛИ";
+            lblTitle.Text = "📊 ОТЧЁТ ПО СУММЕ";
             // 
             // FormReport
             // 
@@ -274,7 +274,7 @@
             Controls.Add(lblProfitCurrent);
             Name = "FormReport";
             StartPosition = FormStartPosition.CenterParent;
-            Text = "Отчёт по прибыли";
+            Text = "Отчёт по сумме уроков";
             ((System.ComponentModel.ISupportInitialize)dgvChart).EndInit();
             ResumeLayout(false);
             PerformLayout();

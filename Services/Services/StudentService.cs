@@ -37,14 +37,7 @@ namespace Services.Services
             return await _studentRepository.GetByIdAsync(id);
         }
 
-        /// <summary>
-        /// Получить студента с его уроками
-        /// </summary>
-        public async Task<StudentModel?> GetStudentWithLessons(int id)
-        {
-            return await _studentRepository.GetWithLessons(id);
-        }
-
+       
         /// <summary>
         /// Создать нового студента
         /// </summary>
@@ -136,67 +129,6 @@ namespace Services.Services
             await _studentRepository.SaveAsync();
 
             return (true, "Студент удалён");
-        }
-
-        /// <summary>
-        /// Поиск студентов
-        /// </summary>
-        public async Task<IEnumerable<StudentModel>> SearchStudents(string searchTerm)
-        {
-            if (string.IsNullOrWhiteSpace(searchTerm))
-                return await GetAllStudents();
-
-            return await _studentRepository.Search(searchTerm);
-        }
-
-        /// <summary>
-        /// Получить студентов по уровню
-        /// </summary>
-        public async Task<IEnumerable<StudentModel>> GetStudentsByLevel(int levelId)
-        {
-            return await _studentRepository.GetByLevel(levelId);
-        }
-
-        /// <summary>
-        /// Получить активных студентов (с уроками в ближайшее время)
-        /// </summary>
-        public async Task<IEnumerable<StudentModel>> GetActiveStudents()
-        {
-            var allStudents = await _studentRepository.GetAllAsync();
-            var today = DateOnly.FromDateTime(DateTime.Today);
-            var monthLater = today.AddMonths(1);
-
-            // Студенты, у которых есть уроки в ближайший месяц
-            var activeStudents = new List<StudentModel>();
-            foreach (var student in allStudents)
-            {
-                var lessons = await _studentRepository.GetWithLessons(student.Id);
-                if (lessons?.Lessons?.Any(l => l.Date >= today && l.Date <= monthLater) == true)
-                {
-                    activeStudents.Add(student);
-                }
-            }
-
-            return activeStudents;
-        }
-
-        /// <summary>
-        /// Получить статистику по студентам
-        /// </summary>
-        public async Task<object> GetStudentStatistics()
-        {
-            var students = await _studentRepository.GetAllAsync();
-            var studentsList = students.ToList();
-
-            return new
-            {
-                TotalStudents = studentsList.Count,
-                AverageAge = studentsList.Any() ? studentsList.Average(s => s.Age) : 0,
-                // Распределение по уровням
-                LevelDistribution = studentsList
-                    .GroupBy(s => s.Level?.LevelName ?? "Без уровня")
-                    .Select(g => new { Level = g.Key, Count = g.Count() })
-            };
         }
     }
 }

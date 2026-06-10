@@ -35,7 +35,7 @@ namespace TutorApp.helpers
                     double y = 30;
 
                     // Заголовок
-                    gfx.DrawString("ОТЧЁТ ПО ПРИБЫЛИ", titleFont, XBrushes.Black,
+                    gfx.DrawString("ОТЧЁТ ПО СУММЕ", titleFont, XBrushes.Black,
                         new XRect(0, y, page.Width, 30), XStringFormats.TopCenter);
                     y += 35;
 
@@ -94,11 +94,11 @@ namespace TutorApp.helpers
         {
             double y = startY;
 
-            gfx.DrawString("ПРИБЫЛЬ", headerFont, XBrushes.DarkGreen,
+            gfx.DrawString("СУММА", headerFont, XBrushes.DarkGreen,
                 new XRect(20, y, pageWidth - 40, 25), XStringFormats.TopLeft);
             y += 25;
 
-            gfx.DrawString($"Прибыль за период: {report.CurrentPeriodProfit:N0} ₽", normalFont, XBrushes.Black,
+            gfx.DrawString($"Сумма за период: {report.CurrentPeriodProfit:N0} ₽", normalFont, XBrushes.Black,
                 new XRect(40, y, pageWidth - 60, 20), XStringFormats.TopLeft);
             y += 20;
 
@@ -109,7 +109,7 @@ namespace TutorApp.helpers
                     normalFont, XBrushes.Black, new XRect(40, y, pageWidth - 60, 20), XStringFormats.TopLeft);
                 y += 20;
 
-                gfx.DrawString($"Прибыль за предыдущий период: {report.PreviousPeriodProfit:N0} ₽",
+                gfx.DrawString($"Сумма за предыдущий период: {report.PreviousPeriodProfit:N0} ₽",
                     normalFont, XBrushes.Black, new XRect(40, y, pageWidth - 60, 20), XStringFormats.TopLeft);
                 y += 20;
             }
@@ -237,7 +237,7 @@ namespace TutorApp.helpers
             const double marginLeft = 50;
             double y = startY + 15;
 
-            gfx.DrawString("ДИНАМИКА ПРИБЫЛИ", headerFont, XBrushes.DarkGreen,
+            gfx.DrawString("ДИНАМИКА СУММЫ", headerFont, XBrushes.DarkGreen,
                 new XRect(marginLeft, y, chartWidth, 25), XStringFormats.TopLeft);
             y += 30;
 

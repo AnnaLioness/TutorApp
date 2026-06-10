@@ -179,7 +179,7 @@
             Controls.Add(lblTitle);
             Name = "FormVkSetup";
             StartPosition = FormStartPosition.CenterParent;
-            Text = "🔍 ТЕСТ";
+            Text = "Настройка ВКонтакте";
             ResumeLayout(false);
             PerformLayout();
         }

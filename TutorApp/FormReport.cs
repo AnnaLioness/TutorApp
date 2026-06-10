@@ -199,7 +199,7 @@ namespace TutorApp
             Text = $"Отчёт - {periodText} ({dateRange})";
 
             // Прибыль
-            lblProfitCurrent.Text = $"💰 Прибыль за период: {report.CurrentPeriodProfit:N0} ₽";
+            lblProfitCurrent.Text = $"💰 Сумма за период: {report.CurrentPeriodProfit:N0} ₽";
 
             if (report.HasPreviousPeriodData)
             {
@@ -232,7 +232,7 @@ namespace TutorApp
                 foreach (var type in report.TopLessonTypes)
                 {
                     listTopTypes.Items.Add($"{type.TypeName}");
-                    listTopTypes.Items.Add($"   💰 {type.TotalAmount:N0} ₽ ({type.PercentageOfTotal}% от прибыли)");
+                    listTopTypes.Items.Add($"   💰 {type.TotalAmount:N0} ₽ ({type.PercentageOfTotal}% от суммы)");
                     listTopTypes.Items.Add($"   📚 {type.LessonsCount} уроков");
                     listTopTypes.Items.Add(""); // разделитель
                 }
@@ -269,7 +269,7 @@ namespace TutorApp
         }
         private void ClearDisplay()
         {
-            lblProfitCurrent.Text = "💰 Прибыль за период: —";
+            lblProfitCurrent.Text = "💰 Сумма за период: —";
             lblProfitChange.Text = "📊 Изменение: —";
             lblLessonsCount.Text = "📚 Проведено уроков: —";
             lblStudentsStats.Text = "👥 Активные ученики: —";
@@ -303,7 +303,7 @@ namespace TutorApp
                         ReportPeriodType.Year => "Год",
                         _ => "Отчёт"
                     };
-                    saveDialog.FileName = $"Отчёт_по_прибыли_{periodName}_{DateTime.Now:yyyyMMdd_HHmmss}.pdf";
+                    saveDialog.FileName = $"Отчёт_по_сумме_{periodName}_{DateTime.Now:yyyyMMdd_HHmmss}.pdf";
 
                     if (saveDialog.ShowDialog() == DialogResult.OK)
                     {
